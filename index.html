@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Futuro do Trabalho: Profissões, Habilidades e a Era da IA</title>
+    
+    <!-- Fonts: Playfair Display (Serif/Editorial) and Inter (Sans/Modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        brandDark: '#0f172a',    // Slate 900 - Sofisticado
+                        brandLight: '#f8fafc',   // Slate 50 - Fundo cinza/gelo elegante
+                        brandCyan: '#06b6d4',    // Ciano moderno
+                        brandCyanDark: '#0891b2',
+                        brandOrange: '#ea580c',  // Laranja escuro e vivido
+                        brandOrangeDark: '#c2410c'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            background-color: #f8fafc; 
+            color: #0f172a; 
+            overflow-x: hidden; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Tipografia Editorial */
+        .editorial-dropcap::first-letter {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: #ea580c;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            margin-top: 0.2rem;
+        }
+
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #06b6d4, #ea580c);
+        }
+
+        /* Efeitos sutis para não poluir o design editorial */
+        .editorial-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .editorial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom scrollbar discreta */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        /* Detalhes do Livro/Acervo */
+        .book-spine {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 8px;
+            background: linear-gradient(to right, rgba(255,255,255,0.4), rgba(255,255,255,0));
+            border-right: 1px solid rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const IconBrain = () => <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>;
+        const IconChart = () => <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>;
+        const IconDatabase = () => <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>;
+        const IconGlobe = () => <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>;
+        const IconUser = () => <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>;
+        const IconQuote = () => <svg className="w-8 h-8 text-brandOrange opacity-50 absolute -top-4 -left-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>;
+
+        // Lead Paragraph with Drop Cap (Estilo Revista)
+        const DidacticIntro = ({ text }) => (
+            <div className="mb-8">
+                <p className="text-lg md:text-xl text-gray-800 leading-relaxed font-light editorial-dropcap">
+                    {text}
+                </p>
+            </div>
+        );
+
+        // Sidebar for Correlations (Estilo Box Lateral de Revista)
+        const CorrelationBlock = ({ sources, title, text }) => (
+            <aside className="bg-white p-6 md:p-8 border-t-4 border-brandOrange shadow-sm my-8 relative">
+                <div className="flex items-center space-x-2 mb-4">
+                    <span className="text-[0.65rem] font-bold tracking-widest uppercase text-brandCyan bg-cyan-50 px-2 py-1 rounded-sm">{sources}</span>
+                </div>
+                {title && <h5 className="font-serif font-bold text-xl text-brandDark mb-3">{title}</h5>}
+                <p className="text-sm md:text-base text-gray-600 leading-relaxed font-serif italic">{text}</p>
+            </aside>
+        );
+
+        // Imagens Editoriais (Evitando sobreposições com aspect-ratio correto)
+        const MagazineImage = ({ src, alt, caption }) => (
+            <figure className="w-full flex flex-col mb-8 md:mb-0">
+                <div className="relative w-full aspect-[4/3] md:aspect-[3/2] overflow-hidden rounded-sm shadow-md bg-gray-200">
+                    <img src={src} alt={alt} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 hover:scale-105" loading="lazy" />
+                </div>
+                <figcaption className="mt-3 text-xs text-gray-500 font-sans tracking-wide uppercase border-b border-gray-200 pb-2">
+                    {caption}
+                </figcaption>
+            </figure>
+        );
+
+        const SectionDivider = () => (
+            <div className="flex items-center justify-center py-16">
+                <div className="w-16 h-px bg-brandOrange"></div>
+                <div className="w-2 h-2 rounded-full bg-brandCyan mx-4"></div>
+                <div className="w-16 h-px bg-brandOrange"></div>
+            </div>
+        );
+
+        const App = () => {
+            const [activeCategory, setActiveCategory] = useState('IA & Dados');
+            const [activeReport, setActiveReport] = useState(null);
+
+            // Dados das Profissões
+            const jobCategories = {
+                'IA & Dados': [
+                    { title: 'Especialista em Ética da IA', desc: 'Garante o desenvolvimento transparente e justo de algoritmos.', img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=400&auto=format&fit=crop' },
+                    { title: 'Auditor de Viés Algorítmico', desc: 'Analisa e corrige vieses sistemáticos em IA corporativa.', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=400&auto=format&fit=crop' },
+                    { title: 'Arquiteto de Gêmeos Digitais', desc: 'Constrói réplicas virtuais complexas de sistemas físicos.', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=400&auto=format&fit=crop' }
+                ],
+                'Saúde & Biotecnologia': [
+                    { title: 'Designer de Medicina Personalizada', desc: 'Adapta tratamentos moleculares ao genoma individual.', img: 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&w=400&auto=format&fit=crop' },
+                    { title: 'Coach de Bem-Estar Genético', desc: 'Gerencia estilo de vida preditivo baseado no DNA.', img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=400&auto=format&fit=crop' },
+                    { title: 'Engenheiro de Bioprinting', desc: 'Opera matrizes 3D para criação de tecidos e órgãos.', img: 'https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?q=80&w=400&auto=format&fit=crop' }
+                ],
+                'Sustentabilidade': [
+                    { title: 'Planejador de Adaptação', desc: 'Estrutura resiliência urbana contra mudanças climáticas.', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=400&auto=format&fit=crop' },
+                    { title: 'Técnico de Captura de Carbono', desc: 'Opera infraestrutura de remoção de CO2 em larga escala.', img: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=400&auto=format&fit=crop' },
+                    { title: 'Estrategista de Rewilding', desc: 'Coordena a restauração agressiva de ecossistemas locais.', img: 'https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=400&auto=format&fit=crop' }
+                ]
+            };
+
+            // Dados dos Relatórios
+            const reportsData = [
+                {
+                    id: 'cni',
+                    title: 'Retratos da Sociedade Brasileira - CNI',
+                    author: 'CNI',
+                    theme: 'bg-emerald-900 text-white border-emerald-950',
+                    synthesis: 'A pesquisa revela um paradoxo: trabalhadores estão acomodados no presente, mas 42,7% são incapazes de projetar sua carreira para daqui a cinco anos. O medo da falta de vagas e de experiência prática paralisa a visão de longo prazo.',
+                    insight: 'A paralisia do trabalhador exige que empresas atuem como bússolas, oferecendo rotas claras de requalificação (upskilling) para evitar uma crise de retenção e engajamento no curto prazo.'
+                },
+                {
+                    id: 'delphi',
+                    title: 'Mudanças nas Competências Básicas',
+                    author: 'Fraunhofer / Hamburgo',
+                    theme: 'bg-slate-900 text-white border-black',
+                    synthesis: 'Estudo Delphi com 34 especialistas mapeia como a IA altera as competências fundamentais. Habilidades de execução caem, enquanto Pensamento Crítico e Competência Ética disparam em relevância.',
+                    insight: 'O humano deixa de ser um executor de tarefas e passa a orquestrador de IA. O recrutamento deve focar na Tolerância à Ambiguidade e no Senso Crítico, superando a triagem por hard skills perecíveis.'
+                },
+                {
+                    id: 'mit',
+                    title: 'Redefining Data Engineering',
+                    author: 'MIT Tech Review',
+                    theme: 'bg-black text-white border-gray-800',
+                    synthesis: 'A Engenharia de Dados deixou os bastidores de TI. Com 72% dos líderes a considerando essencial, esses profissionais agora moldam a estratégia de IA, lidando com volumes insanos de dados não estruturados.',
+                    insight: 'Tratar dados como função de suporte é atestar obsolescência. Engenheiros de dados são os arquitetos de negócios modernos, definindo os limites do que é viável na implementação da IA Agêntica.'
+                },
+                {
+                    id: 'futura',
+                    title: '100 Profissões do Futuro',
+                    author: 'The Futura Lab',
+                    theme: 'bg-orange-900 text-white border-orange-950',
+                    synthesis: 'Mapeamento das carreiras emergentes nas interseções de IA, biotecnologia e sustentabilidade. A especialização extrema passa a cruzar obrigatoriamente com habilidades sociais transversais.',
+                    insight: 'Não estamos apenas automatizando, estamos criando novas categorias profissionais. O mercado precisa adotar micro-certificações ágeis para acompanhar profissões que nascem e morrem em ciclos curtos.'
+                },
+                {
+                    id: 'ssir',
+                    title: 'Uma nova porta de entrada',
+                    author: 'SSIR Brasil',
+                    theme: 'bg-red-900 text-white border-red-950',
+                    synthesis: 'A dependência de diplomas acadêmicos cria um gargalo artificial. Empregadores de ponta buscam "expertise latente" — habilidades práticas e adjacentes que o trabalhador possui, mas não são certificadas de forma tradicional.',
+                    insight: 'A contratação baseada em habilidades (skills-based hiring) e o uso de credenciais portáteis validadas por IA é o único caminho pragmático para unir as "Novas Profissões" à atual força de trabalho.'
+                }
+            ];
+
+            return (
+                <div className="font-sans text-brandDark bg-brandLight">
+                    
+                    {/* Header: Editorial Splash Cover */}
+                    <header className="relative w-full min-h-[70vh] flex flex-col justify-center bg-brandDark text-white pt-20 pb-16 px-6 md:px-12 overflow-hidden border-b-8 border-brandOrange">
+                        {/* Imagem de Fundo Elegante */}
+                        <div className="absolute inset-0 z-0">
+                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1920&auto=format&fit=crop" className="w-full h-full object-cover opacity-20" alt="Arquitetura de Escritório Moderna" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-brandDark via-brandDark/90 to-brandDark/40"></div>
+                        </div>
+
+                        <div className="relative z-10 max-w-5xl mx-auto w-full animate-fade-in">
+                            <div className="mb-8 border-l-4 border-brandCyan pl-4">
+                                <span className="font-sans font-bold tracking-[0.2em] uppercase text-xs text-brandCyan block mb-2">Relatório Especial • Foresight Estratégico</span>
+                                <span className="font-serif italic text-gray-300 text-sm">Uma análise transversal</span>
+                            </div>
+                            
+                            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold leading-[1.1] mb-6 tracking-tight">
+                                O Futuro <br/> <span className="text-gray-200">do Trabalho.</span>
+                            </h1>
+                            
+                            <h2 className="text-xl md:text-2xl font-light text-gray-200 leading-relaxed max-w-3xl mb-8 font-sans">
+                                Como a IA Agêntica, as pressões climáticas e as novas taxonomias de habilidades estão redesenhando o cenário corporativo global.
+                            </h2>
+                            
+                            <div className="flex flex-wrap items-center gap-4 text-xs font-sans text-gray-300 uppercase tracking-widest border-t border-gray-700 pt-6">
+                                <span>Fontes: CNI</span>
+                                <span className="text-brandOrange">•</span>
+                                <span>Delphi Study</span>
+                                <span className="text-brandOrange">•</span>
+                                <span>MIT Tech Review</span>
+                                <span className="text-brandOrange">•</span>
+                                <span>SSIR</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <main className="max-w-5xl mx-auto px-6 py-16">
+                        
+                        {/* Section 1: Incerteza (CNI) */}
+                        <section className="mb-20 animate-fade-in">
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
+                                {/* Coluna Principal (Texto) */}
+                                <div className="md:col-span-7">
+                                    <h3 className="font-serif text-3xl md:text-5xl font-bold mb-6 tracking-tight text-brandDark">A Epidemia do Curto Prazo</h3>
+                                    <p className="text-xs font-bold uppercase tracking-widest text-brandOrange mb-8 border-b border-gray-200 pb-2 inline-block">Perspectiva: Sociedade Brasileira</p>
+                                    
+                                    <DidacticIntro 
+                                        text="A transformação do trabalho não começa nos laboratórios do Vale do Silício; ela esbarra, primeiro, na percepção psicológica do trabalhador comum. A recente pesquisa da CNI expõe uma dicotomia preocupante na base da pirâmide produtiva."
+                                    />
+                                    
+                                    <p className="text-gray-800 font-sans leading-relaxed mb-6 font-medium">
+                                        Enquanto o mercado corporativo debate a implementação de inteligências artificiais autônomas, uma imensa parcela da força de trabalho encontra-se paralisada frente ao próprio futuro, incapaz de visualizar sua trajetória além do horizonte de cinco anos. O medo crônico da falta de vagas e a sensação de déficit em experiência prática congelam a visão estratégica individual.
+                                    </p>
+
+                                    <div className="bg-white p-8 border border-gray-200 shadow-sm mt-8 editorial-card">
+                                        <h4 className="font-serif text-xl font-bold mb-6 text-brandDark">Prioridades Imediatas vs. Longo Prazo</h4>
+                                        <div className="space-y-5 font-sans">
+                                            <div>
+                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-700"><span>Salário / Rendimento</span><span className="font-bold text-brandDark">28,7%</span></div>
+                                                <div className="w-full bg-gray-200 h-1.5"><div className="bg-brandDark h-1.5" style={{width: '28.7%'}}></div></div>
+                                            </div>
+                                            <div>
+                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-700"><span>Estabilidade no Emprego</span><span className="font-bold text-brandOrange">22,4%</span></div>
+                                                <div className="w-full bg-gray-200 h-1.5"><div className="bg-brandOrange h-1.5" style={{width: '22.4%'}}></div></div>
+                                            </div>
+                                            <div>
+                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-700"><span>Perspectiva de Crescimento</span><span className="font-bold text-brandCyan">20,1%</span></div>
+                                                <div className="w-full bg-gray-200 h-1.5"><div className="bg-brandCyan h-1.5" style={{width: '20.1%'}}></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Coluna Lateral (Destaques e Imagem) */}
+                                <div className="md:col-span-5 flex flex-col h-full">
+                                    <MagazineImage 
+                                        src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop" 
+                                        alt="Análise de dados corporativos"
+                                        caption="Dados revelam paralisia em planejamento de carreira a médio prazo."
+                                    />
+                                    <div className="mt-8 bg-gray-50 p-6 border-l-2 border-brandDark">
+                                        <span className="text-6xl font-serif font-black text-brandOrange block leading-none mb-2">42,7%</span>
+                                        <p className="text-sm font-sans text-gray-800 uppercase tracking-wide font-bold">Dos brasileiros não conseguem responder em qual ocupação se veem trabalhando daqui a cinco anos.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <SectionDivider />
+
+                        {/* Section 3: Engenharia de Dados (MIT) */}
+                        <section className="mb-20 animate-fade-in">
+                            <div className="bg-brandDark text-white p-8 md:p-16 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
+                                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1920&auto=format&fit=crop" className="w-full h-full object-cover" alt="Data Center" />
+                                </div>
+                                
+                                <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12">
+                                    <div>
+                                        <h3 className="font-serif text-3xl md:text-5xl font-bold mb-6 tracking-tight text-white">Os Novos Arquitetos do Poder</h3>
+                                        <p className="text-xs font-bold uppercase tracking-widest text-brandOrange mb-8 border-b border-gray-700 pb-2 inline-block">Perspectiva: Vanguardas de TI (MIT)</p>
+
+                                        <DidacticIntro 
+                                            text="Na linha de frente da transformação prevista pelo estudo Delphi, o MIT identifica a mutação de uma carreira outrora operacional. A Engenharia de Dados não é mais sobre manter o 'encanamento' dos servidores."
+                                        />
+                                        
+                                        <div className="relative mt-8 bg-black/60 p-8 border border-gray-700 backdrop-blur-sm shadow-xl">
+                                            <IconQuote />
+                                            <p className="font-serif italic text-lg leading-relaxed relative z-10 text-white font-medium">
+                                                Se a sua alta administração ainda considera a engenharia de dados como uma função de suporte, você já está cinco anos atrasado - e provavelmente treinando seus futuros concorrentes.
+                                            </p>
+                                            <p className="text-xs uppercase tracking-widest text-brandCyan mt-4 font-bold">— Chris Child, VP Snowflake</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-col justify-center">
+                                        <p className="text-gray-200 font-sans leading-relaxed mb-10 font-medium">
+                                            Com o advento da IA Agêntica (sistemas capazes de agir autonomamente), a alimentação desses modelos exige o tratamento de volumes colossais de dados não-estruturados. Os engenheiros de dados agora sentam nas mesas de diretoria, ditando os limites do que a inteligência do negócio pode ou não alcançar.
+                                        </p>
+
+                                        <h4 className="font-serif text-2xl font-bold mb-6 text-brandCyan">Produtividade Acelerada pela IA</h4>
+                                        <div className="space-y-6">
+                                            <div>
+                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-300"><span>Melhoria na Qualidade do Código/Trabalho</span><span className="font-bold text-white">77%</span></div>
+                                                <div className="w-full bg-gray-800 h-1"><div className="bg-brandOrange h-1" style={{width: '77%'}}></div></div>
+                                            </div>
+                                            <div>
+                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-300"><span>Aumento no Volume de Entregas</span><span className="font-bold text-white">74%</span></div>
+                                                <div className="w-full bg-gray-800 h-1"><div className="bg-brandCyan h-1" style={{width: '74%'}}></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <SectionDivider />
+
+                        {/* Section 4: As Novas Profissões (Futura Lab) */}
+                        <section className="mb-20 animate-fade-in">
+                            <div className="text-center max-w-3xl mx-auto mb-12">
+                                <h3 className="font-serif text-3xl md:text-5xl font-bold mb-6 tracking-tight text-brandDark">O Catálogo de Novas Profissões</h3>
+                                <p className="text-xs font-bold uppercase tracking-widest text-brandOrange mb-6 border-b border-gray-200 pb-2 inline-block">Perspectiva: The Futura Lab</p>
+                                
+                                <p className="text-lg text-gray-800 font-medium leading-relaxed">
+                                    Onde as novas competências éticas (Delphi) e o gerenciamento de dados complexos (MIT) se encontram? No catálogo das novas profissões. A automação oblitera o trabalho mecânico, mas faz nascer uma hiperespecialização nas fronteiras da biologia, clima e dados.
+                                </p>
+                            </div>
+
+                            {/* Interactive Filter */}
+                            <div className="flex flex-wrap justify-center gap-3 mb-10">
+                                {Object.keys(jobCategories).map((cat) => (
+                                    <button 
+                                        key={cat}
+                                        onClick={() => setActiveCategory(cat)}
+                                        className={`px-5 py-2 text-xs font-bold tracking-widest uppercase transition-all duration-300 ${activeCategory === cat ? 'bg-brandDark text-white shadow-md' : 'bg-white text-gray-800 border border-gray-400 hover:border-brandDark hover:bg-gray-100 shadow-sm'}`}
+                                    >
+                                        {cat}
+                                    </button>
+                                ))}
+                            </div>
+
+                            {/* Dynamic Job Cards with Photos */}
+                            <div className="grid md:grid-cols-3 gap-8">
+                                {jobCategories[activeCategory].map((job, idx) => (
+                                    <div key={idx} className="bg-white border border-gray-200 flex flex-col h-full editorial-card overflow-hidden group shadow-md">
+                                        <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-200">
+                                            <img src={job.img} alt={job.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy"/>
+                                            <div className="absolute top-0 left-0 bg-brandOrange text-white text-xs font-bold px-3 py-1 uppercase tracking-widest m-4 shadow">
+                                                0{idx + 1}
+                                            </div>
+                                        </div>
+                                        <div className="p-6 flex flex-col flex-grow bg-white">
+                                            <h4 className="font-serif font-bold text-xl text-brandDark mb-3 leading-snug">{job.title}</h4>
+                                            <p className="text-gray-800 text-sm font-sans leading-relaxed mt-auto font-medium">{job.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+
+                        <SectionDivider />
+
+                        {/* Section 5: A Nova Porta de Entrada (SSIR) */}
+                        <section className="mb-20 animate-fade-in">
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+                                <div className="md:col-span-6">
+                                    <h3 className="font-serif text-3xl md:text-5xl font-bold mb-6 tracking-tight text-brandDark">O Colapso do Diploma</h3>
+                                    <p className="text-xs font-bold uppercase tracking-widest text-brandOrange mb-8 border-b border-gray-200 pb-2 inline-block">A Solução Sistêmica (SSIR)</p>
+                                    
+                                    <DidacticIntro 
+                                        text="Como conectar a força de trabalho atual, paralisada pela incerteza (CNI), com um catálogo de profissões altamente sofisticadas (Futura Lab)? A resposta exige implodir o modelo educacional vigente."
+                                    />
+                                    
+                                    <p className="text-gray-800 font-sans leading-relaxed mb-6 font-medium">
+                                        O artigo da *Stanford Social Innovation Review* alerta: usar diplomas universitários como única "porta de entrada" gerou um gargalo ineficiente. Empregadores na vanguarda não buscam mais papéis carimbados; eles caçam <strong>expertise latente</strong> — habilidades práticas e adjacentes que o trabalhador possui, mas não são certificadas de forma tradicional.
+                                    </p>
+                                    
+                                    <CorrelationBlock 
+                                        sources="SSIR x Delphi"
+                                        title="A Morte da Hard Skill Formal"
+                                        text="Enquanto a academia prevê que habilidades puramente técnicas serão corroídas pela IA, a exigência de mercado corrobora essa visão: habilidades comportamentais e cognitivas serão as novas chaves de entrada."
+                                    />
+                                </div>
+                                
+                                <div className="md:col-span-6 space-y-4">
+                                    <h4 className="font-serif text-2xl font-bold mb-6 text-brandDark">Novos Princípios de Contratação</h4>
+                                    
+                                    <div className="bg-brandDark text-white p-6 border-l-4 border-brandCyan">
+                                        <span className="text-brandCyan font-bold text-lg block mb-1">01. Expertise Latente</span>
+                                        <p className="text-sm text-gray-300 font-light">Valorização de experiências vividas, resolução de problemas no dia a dia e resiliência, substituindo graduações formais.</p>
+                                    </div>
+                                    <div className="bg-brandDark text-white p-6 border-l-4 border-brandOrange">
+                                        <span className="text-brandOrange font-bold text-lg block mb-1">02. Foco na Prática</span>
+                                        <p className="text-sm text-gray-300 font-light">Aprendizagem baseada no trabalho torna-se o modelo padrão, servindo de escada rápida e validada para vagas abertas.</p>
+                                    </div>
+                                    <div className="bg-brandDark text-white p-6 border-l-4 border-brandCyan">
+                                        <span className="text-brandCyan font-bold text-lg block mb-1">03. Contratação por Habilidades</span>
+                                        <p className="text-sm text-gray-300 font-light">Abandono de filtros por diploma. Avaliação baseada no desempenho, abrindo espaço para talentos de origens não-tradicionais.</p>
+                                    </div>
+                                    <div className="bg-brandDark text-white p-6 border-l-4 border-brandOrange">
+                                        <span className="text-brandOrange font-bold text-lg block mb-1">04. Credenciais Portáteis</span>
+                                        <p className="text-sm text-gray-300 font-light">Sistemas interoperáveis legíveis por IA onde o indivíduo carrega seu "histórico de habilidades" validado de forma imutável.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Interactive Acervo Section (Rodapé Editorial) */}
+                        <section className="mt-24 pt-16 border-t border-gray-300 relative">
+                            <div className="text-center mb-16">
+                                <h3 className="text-3xl font-serif font-bold text-brandDark mb-4">Acervo Digital & Síntese</h3>
+                                <p className="text-gray-500 font-serif italic max-w-2xl mx-auto text-sm">
+                                    Clique nos dossiês abaixo para revelar os insights originais e as recomendações estratégicas consolidadas de cada fonte.
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 mb-12 relative z-20">
+                                {reportsData.map((report) => (
+                                    <div 
+                                        key={report.id} 
+                                        onClick={() => setActiveReport(activeReport === report.id ? null : report.id)}
+                                        className={`cursor-pointer transform transition-all duration-500 hover:-translate-y-4 relative ${activeReport === report.id ? 'scale-105 z-30 shadow-2xl ring-2 ring-brandDark ring-offset-4' : 'scale-100 shadow-md'}`}
+                                    >
+                                        {/* "Capa de Relatório" CSS */}
+                                        <div className={`aspect-[3/4] overflow-hidden relative flex flex-col p-4 md:p-5 ${report.theme}`}>
+                                            <div className="book-spine"></div>
+                                            <div className="relative z-10 flex-grow flex flex-col justify-between">
+                                                <div>
+                                                    <p className="text-[0.55rem] md:text-[0.65rem] uppercase tracking-widest opacity-80 mb-3 border-b border-white/20 pb-2">{report.author}</p>
+                                                    <h4 className="font-serif font-bold leading-snug text-sm md:text-lg">{report.title}</h4>
+                                                </div>
+                                                <div className="self-end mt-4">
+                                                    <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center bg-white/5 backdrop-blur-sm">
+                                                        <span className="text-xs">+</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Detalhe do Relatório Selecionado (Painel Expansivo) */}
+                            {activeReport && (
+                                <div className="bg-white border-y border-brandDark shadow-2xl p-8 md:p-12 animate-fade-in relative z-10 mt-8 mb-16 overflow-hidden">
+                                    <button 
+                                        onClick={() => setActiveReport(null)}
+                                        className="absolute top-6 right-6 text-gray-400 hover:text-brandOrange uppercase text-xs tracking-widest font-bold transition-colors z-20"
+                                    >
+                                        [ Fechar Painel ]
+                                    </button>
+                                    
+                                    {reportsData.map((report) => report.id === activeReport && (
+                                        <div key={`detail-${report.id}`} className="grid md:grid-cols-2 gap-12 relative">
+                                            <div className="flex flex-col justify-center">
+                                                <span className="text-xs font-bold uppercase tracking-widest text-brandCyan mb-2">{report.author}</span>
+                                                <h4 className="text-3xl md:text-4xl font-serif font-bold text-brandDark mb-8 leading-tight">{report.title}</h4>
+                                                
+                                                <h5 className="font-bold text-brandDark uppercase tracking-widest text-xs mb-3 border-b border-gray-200 pb-2">Síntese Documental</h5>
+                                                <p className="text-gray-600 font-sans leading-relaxed mb-8 md:mb-0">{report.synthesis}</p>
+                                            </div>
+                                            
+                                            <div className="bg-brandLight p-8 border-l-4 border-brandOrange h-full flex flex-col justify-center">
+                                                <h5 className="font-bold text-brandOrange uppercase tracking-widest text-xs mb-4 flex items-center">
+                                                    Insight Estratégico (Foresight)
+                                                </h5>
+                                                <p className="text-gray-800 leading-relaxed font-serif text-lg md:text-xl italic">"{report.insight}"</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </section>
+
+                    </main>
+
+                    {/* Footer Clean Editorial */}
+                    <footer className="bg-brandDark text-gray-200 py-16 px-6 text-center border-t border-gray-700 shadow-inner">
+                        <div className="max-w-4xl mx-auto">
+                            <h5 className="text-white font-serif font-bold text-xl mb-6">Referências Bibliográficas</h5>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-sans text-left text-gray-300 mb-12">
+                                <p><strong className="text-white">CNI (2026):</strong> Retratos da Sociedade Brasileira - CNI: Futuro Profissional.</p>
+                                <p><strong className="text-white">Estudo Delphi (2026):</strong> Fundamentos para o Futuro - Mudanças nas Competências na Era da IA.</p>
+                                <p><strong className="text-white">MIT Tech Review & Snowflake (2025):</strong> Redefinindo a Engenharia de Dados na Era da IA.</p>
+                                <p><strong className="text-white">The Futura Lab:</strong> 100 Profissões do Futuro (Martha Gabriel).</p>
+                                <p><strong className="text-white">SSIR Brasil (2025):</strong> Uma nova porta de entrada no mercado de trabalho na era da IA.</p>
+                            </div>
+                            
+                            <div className="pt-8 border-t border-gray-700 text-xs uppercase tracking-widest flex flex-col md:flex-row justify-center items-center gap-4 text-gray-400">
+                                <span className="text-gray-200">Design de Futuros</span>
+                                <span className="hidden md:inline text-brandOrange font-bold">•</span>
+                                <span className="text-gray-200">Reportagem Visual</span>
+                                <span className="hidden md:inline text-brandCyan font-bold">•</span>
+                                <span className="text-gray-200">React SPA</span>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
