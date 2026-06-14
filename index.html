@@ -687,14 +687,14 @@
                                     <IconGlobe />
                                 </div>
                                 <div>
-                                    <h3 className="text-4xl font-serif font-bold text-brandDark tracking-tight">As 100 Profissões do Futuro</h3>
-                                    <p className="text-gray-500 uppercase tracking-widest text-xs font-bold mt-2">Fonte: The Futura Lab (Martha Gabriel)</p>
+                                    <h3 className="text-4xl font-serif font-bold text-brandDark tracking-tight">O Catálogo Completo: 100 Profissões do Futuro</h3>
+                                    <p className="text-gray-500 uppercase tracking-widest text-xs font-bold mt-2">Íntegra do Mapeamento • The Futura Lab (Martha Gabriel)</p>
                                 </div>
                             </div>
                             
                             <div className="max-w-4xl mb-12">
                                 <DidacticIntro 
-                                    text="A automação não dizima o trabalho; ela o hiper-especializa. O mapeamento abaixo revela as carreiras emergentes nas interseções de IA, biotecnologia e ecologia. Estas são as ocupações que exigirão as microcertificações (SSIR) e a agilidade (Delphi) para as quais precisamos preparar a base produtiva (CNI)."
+                                    text="A automação não dizima o trabalho; ela o hiper-especializa. O mapeamento integral abaixo revela TODAS as 100 carreiras emergentes, categorizadas em 10 blocos de fronteira. Estas são as ocupações exatas que exigirão as microcertificações (SSIR) e a agilidade metodológica (Delphi) para as quais precisamos urgentemente preparar a base produtiva e educacional (CNI)."
                                 />
                             </div>
 
@@ -710,7 +710,7 @@
                                             : 'bg-white text-gray-600 border-gray-300 hover:border-brandOrange hover:text-brandOrange shadow-sm'
                                         }`}
                                     >
-                                        {cat}
+                                        {cat} <span className={`ml-1 opacity-70 text-[0.65rem] ${activeCategory === cat ? 'text-brandOrange' : ''}`}>(10)</span>
                                     </button>
                                 ))}
                             </div>
@@ -738,23 +738,29 @@
                                 {/* Lista das 10 Profissões (Grid Interno) */}
                                 <div className="p-8 md:p-12">
                                     <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
-                                        {jobCategories[activeCategory].jobs.map((job, idx) => (
-                                            <div key={idx} className="flex gap-4 group">
-                                                <div className="flex-shrink-0 font-serif text-3xl font-black text-gray-200 group-hover:text-brandCyan transition-colors">
-                                                    {(idx + 1).toString().padStart(2, '0')}
+                                        {jobCategories[activeCategory].jobs.map((job, idx) => {
+                                            // Calculando o índice global contínuo (001 a 100) baseado na categoria atual
+                                            const categoryKeys = Object.keys(jobCategories);
+                                            const categoryIndex = categoryKeys.indexOf(activeCategory);
+                                            const globalIndex = (categoryIndex * 10) + idx + 1;
+
+                                            return (
+                                                <div key={idx} className="flex gap-4 group">
+                                                    <div className="flex-shrink-0 font-serif text-3xl font-black text-gray-200 group-hover:text-brandCyan transition-colors">
+                                                        {globalIndex.toString().padStart(3, '0')}
+                                                    </div>
+                                                    <div>
+                                                        <h5 className="font-bold text-brandDark text-lg mb-1 leading-tight group-hover:text-brandOrange transition-colors">{job.title}</h5>
+                                                        <p className="text-gray-600 text-sm leading-relaxed">{job.desc}</p>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <h5 className="font-bold text-brandDark text-lg mb-1 leading-tight group-hover:text-brandOrange transition-colors">{job.title}</h5>
-                                                    <p className="text-gray-600 text-sm leading-relaxed">{job.desc}</p>
-                                                </div>
-                                            </div>
-                                        ))}
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             </div>
                         </section>
 
-                        {}
                         {/* Interactive Acervo Section (Rodapé Editorial) */}
                         <section className="mt-28 pt-16 border-t border-gray-300 relative z-0">
                             <div className="text-center mb-16">
