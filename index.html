@@ -160,66 +160,209 @@
             const [activeCategory, setActiveCategory] = useState('IA & Dados');
             const [activeReport, setActiveReport] = useState(null);
 
-            // Dados das Profissões
             const jobCategories = {
-                'IA & Dados': [
-                    { title: 'Especialista em Ética da IA', desc: 'Garante o desenvolvimento transparente e justo de algoritmos.', img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=400&auto=format&fit=crop' },
-                    { title: 'Auditor de Viés Algorítmico', desc: 'Analisa e corrige vieses sistemáticos em IA corporativa.', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=400&auto=format&fit=crop' },
-                    { title: 'Arquiteto de Gêmeos Digitais', desc: 'Constrói réplicas virtuais complexas de sistemas físicos.', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=400&auto=format&fit=crop' }
-                ],
-                'Saúde & Biotecnologia': [
-                    { title: 'Designer de Medicina Personalizada', desc: 'Adapta tratamentos moleculares ao genoma individual.', img: 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&w=400&auto=format&fit=crop' },
-                    { title: 'Coach de Bem-Estar Genético', desc: 'Gerencia estilo de vida preditivo baseado no DNA.', img: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=400&auto=format&fit=crop' },
-                    { title: 'Engenheiro de Bioprinting', desc: 'Opera matrizes 3D para criação de tecidos e órgãos.', img: 'https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?q=80&w=400&auto=format&fit=crop' }
-                ],
-                'Sustentabilidade': [
-                    { title: 'Planejador de Adaptação', desc: 'Estrutura resiliência urbana contra mudanças climáticas.', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=400&auto=format&fit=crop' },
-                    { title: 'Técnico de Captura de Carbono', desc: 'Opera infraestrutura de remoção de CO2 em larga escala.', img: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=400&auto=format&fit=crop' },
-                    { title: 'Estrategista de Rewilding', desc: 'Coordena a restauração agressiva de ecossistemas locais.', img: 'https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=400&auto=format&fit=crop' }
-                ]
+                'IA & Dados': {
+                    insight: "Enquanto 42% dos brasileiros não conseguem planejar 5 anos à frente (CNI), esta categoria prova que dominar dados não é mais suporte, mas arquitetura de negócios (MIT). As competências de Pensamento Crítico e Tolerância à Ambiguidade (Delphi) são o núcleo aqui.",
+                    img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop",
+                    jobs: [
+                        { title: 'Especialista em Ética da IA', desc: 'Garante que a IA seja desenvolvida e usada de forma transparente e justa.' },
+                        { title: 'Auditor de Viés Algorítmico', desc: 'Detecta e corrige vieses injustos em algoritmos.' },
+                        { title: 'Especialista em Computação Quântica', desc: 'Cria sistemas e algoritmos quânticos para resolver problemas complexos.' },
+                        { title: 'Especialista em Interação Humano-IA', desc: 'Melhora a colaboração entre pessoas e IA.' },
+                        { title: 'Desenvolvedor de Dados Sintéticos', desc: 'Cria dados artificiais seguros para treinar modelos de IA.' },
+                        { title: 'Tradutor de Modelos de IA', desc: 'Traduz decisões complexas da IA em linguagem humana.' },
+                        { title: 'Arquiteto de Gêmeos Digitais', desc: 'Constrói réplicas virtuais de sistemas físicos.' },
+                        { title: 'Curador de Conteúdo de IA', desc: 'Filtra e verifica mídias geradas por IA.' },
+                        { title: 'Oficial de Conformidade em IA', desc: 'Assegura que organizações sigam normas legais e regulatórias de IA.' },
+                        { title: 'Gerente de Governança de IA', desc: 'Desenvolve políticas para o uso responsável da IA.' }
+                    ]
+                },
+                'Saúde & Biotecnologia': {
+                    insight: "A intersecção perfeita com a SSIR: essas profissões não dependem apenas da medicina tradicional, mas exigem 'expertise latente' híbrida, cruzando biologia, análise de dados e habilidades sociais e empáticas (Delphi).",
+                    img: "https://images.unsplash.com/photo-1532187863486-abf9db0c20a5?q=80&w=800&auto=format&fit=crop",
+                    jobs: [
+                        { title: 'Coach de Bem-Estar Genético', desc: 'Cria planos de saúde personalizados a partir do DNA.' },
+                        { title: 'Conselheiro de Longevidade', desc: 'Orienta sobre como prolongar uma vida saudável.' },
+                        { title: 'Especialista em Interface Neural', desc: 'Desenvolve ferramentas de comunicação cérebro-computador.' },
+                        { title: 'Companheiro de Saúde Digital', desc: 'Suporte híbrido (IA + humano) para pacientes.' },
+                        { title: 'Designer de Medicina Personalizada', desc: 'Adapta tratamentos ao perfil genético individual.' },
+                        { title: 'Engenheiro de Tecidos Regenerativos', desc: 'Desenvolve órgãos e tecidos cultivados em laboratório.' },
+                        { title: 'Curador de Bioinformática', desc: 'Organiza dados genéticos e médicos para pesquisa.' },
+                        { title: 'Engenheiro de Bioprinting', desc: 'Projeta e opera impressoras 3D para criar órgãos artificiais.' },
+                        { title: 'Pesquisador em Nanomedicina', desc: 'Desenvolve soluções nanotecnológicas para uso médico.' },
+                        { title: 'Técnico em Robótica Médica', desc: 'Opera robôs para cirurgias, diagnósticos e cuidados.' }
+                    ]
+                },
+                'Clima & Sustentabilidade': {
+                    insight: "A urgência climática fará da Sustentabilidade uma transversal obrigatória. A Competência de Resolução de Problemas Complexos (Delphi) é o motor que moverá a transição de engenheiros mecânicos tradicionais para estrategistas do clima.",
+                    img: "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?q=80&w=800&auto=format&fit=crop",
+                    jobs: [
+                        { title: 'Planejador de Adaptação Climática', desc: 'Cria estratégias para lidar com mudanças climáticas.' },
+                        { title: 'Técnico em Captura de Carbono', desc: 'Opera sistemas que removem CO2 do ar.' },
+                        { title: 'Designer de Economia Circular', desc: 'Cria produtos com desperdício zero.' },
+                        { title: 'Especialista em Agricultura Oceânica', desc: 'Desenvolve fazendas sustentáveis no mar.' },
+                        { title: 'Estrategista de Rewilding', desc: 'Restaura ecossistemas para o equilíbrio natural.' },
+                        { title: 'Cientista de Materiais Sustentáveis', desc: 'Inventa alternativas ecológicas aos plásticos.' },
+                        { title: 'Engenheiro de Transição Energética', desc: 'Constrói infraestrutura de energia renovável.' },
+                        { title: 'Consultor de Migração Climática', desc: 'Ajuda comunidades a se realocarem de zonas de risco.' },
+                        { title: 'Supervisor de Construção Verde', desc: 'Supervisiona projetos de construção ecológica.' },
+                        { title: 'Operador de Drones de Restauração Ecológica', desc: 'Usa drones para reflorestar e restaurar a natureza.' }
+                    ]
+                },
+                'Espaço & Exploração': {
+                    insight: "O extremo oposto da visão de curto prazo levantada pela CNI. A economia orbital exigirá visão prospectiva de décadas. Habilidades como Autogestão e Tolerância ao Estresse e Ambiguidade (Delphi) são os pilares de entrada.",
+                    img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop",
+                    jobs: [
+                        { title: 'Controlador de Tráfego Espacial', desc: 'Gerencia satélites e naves em órbita terrestre.' },
+                        { title: 'Guia de Turismo Espacial', desc: 'Conduz viajantes em aventuras fora da Terra.' },
+                        { title: 'Gerente de Colonização em Marte', desc: 'Planeja e administra a logística de uma colônia marciana.' },
+                        { title: 'Astrobiólogo', desc: 'Pesquisa e estuda vida em outros planetas.' },
+                        { title: 'Engenheiro de Remoção de Lixo Espacial', desc: 'Remove detritos perigosos da órbita.' },
+                        { title: 'Especialista em Agricultura Extraterrestre', desc: 'Desenvolve agricultura em Marte ou na Lua.' },
+                        { title: 'Engenheiro de Construção Fora da Terra', desc: 'Constrói infraestrutura em baixa gravidade.' },
+                        { title: 'Médico Espacial', desc: 'Trata problemas de saúde em ambientes espaciais.' },
+                        { title: 'Oficial de Comunicações Interplanetárias', desc: 'Gerencia sistemas de comunicação espacial.' },
+                        { title: 'Designer de Entretenimento em Gravidade Zero', desc: 'Cria jogos e espetáculos para o espaço.' }
+                    ]
+                },
+                'Sociedade & Cultura': {
+                    insight: "Enquanto as competências técnicas (Funcionais) perdem valor, o estudo Delphi crava: a Competência Ética, Cultural e a Empatia são o último refúgio humano, essenciais para gerenciar a transição das comunidades para realidades digitais.",
+                    img: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=800&auto=format&fit=crop",
+                    jobs: [
+                        { title: 'Curador de Experiências em RV', desc: 'Projeta mundos virtuais imersivos.' },
+                        { title: 'Gerente de Comunidades no Metaverso', desc: 'Supervisiona comunidades virtuais online.' },
+                        { title: 'Conselheiro de Luto Digital', desc: 'Ajuda famílias a lidar com legados digitais de entes queridos.' },
+                        { title: 'Futurista Intercultural', desc: 'Orienta sobre tendências culturais globais.' },
+                        { title: 'Professor de Ética em Tecnologias Emergentes', desc: 'Ensina a relação da sociedade com a tecnologia.' },
+                        { title: 'Especialista em Curadoria de Memórias', desc: 'Preserva arquivos digitais pessoais.' },
+                        { title: 'Educador de Cidadania Global', desc: 'Ensina competências para um mundo interconectado.' },
+                        { title: 'Analista de Dados de Inclusão', desc: 'Monitora equidade e diversidade por meio de dados.' },
+                        { title: 'Consultor do Futuro das Famílias', desc: 'Orienta sobre novas estruturas familiares.' },
+                        { title: 'Defensor dos Direitos Humanos Digitais', desc: 'Protege direitos em espaços digitais.' }
+                    ]
+                },
+                'Alimentos & Agricultura': {
+                    insight: "O antigo trabalhador do campo dá lugar ao orquestrador de automação. Requalificar esta base operária com microcertificações (SSIR) é o único caminho para evitar o desemprego estrutural apontado pelo temor captado na CNI.",
+                    img: "https://images.unsplash.com/photo-1530836369250-ef71a3f5e4bf?q=80&w=800&auto=format&fit=crop",
+                    jobs: [
+                        { title: 'Operador de Fazendas Verticais', desc: 'Administra fazendas internas de alta tecnologia.' },
+                        { title: 'Técnico em Carne Cultivada', desc: 'Produz carne cultivada para o mercado.' },
+                        { title: 'Analista de Agricultura de Precisão', desc: 'Usa dados para otimizar a eficiência agrícola.' },
+                        { title: 'Especialista em Drones Polinizadores', desc: 'Programa drones para substituir abelhas.' },
+                        { title: 'Empreendedor em Cultivo de Algas', desc: 'Cria negócios baseados em produtos de algas.' },
+                        { title: 'Estrategista de Desperdício de Alimentos', desc: 'Reduz perdas nas cadeias de suprimento.' },
+                        { title: 'Nutricionista Baseado em DNA', desc: 'Desenvolve dietas personalizadas por perfil genético.' },
+                        { title: 'Educador em Agroecologia', desc: 'Ensina práticas agrícolas sustentáveis.' },
+                        { title: 'Chef de Proteína de Insetos', desc: 'Prepara refeições com proteínas alternativas.' },
+                        { title: 'Designer de Políticas de Segurança Alimentar', desc: 'Cria leis para estabilidade alimentar global.' }
+                    ]
+                },
+                'Segurança & Risco': {
+                    insight: "Gerenciar os bilhões de dados abordados pelo relatório do MIT traz novos vetores de risco cibernético e biológico. A segurança agora foca em proteger arquiteturas descentralizadas e simulações complexas.",
+                    img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=800&auto=format&fit=crop",
+                    jobs: [
+                        { title: 'Arquiteto de Malha de Cibersegurança', desc: 'Constrói defesas cibernéticas flexíveis.' },
+                        { title: 'Criptógrafo Quântico', desc: 'Protege dados com tecnologia quântica.' },
+                        { title: 'Técnico em Defesa Contra Drones', desc: 'Desenvolve sistemas anti-drones.' },
+                        { title: 'Investigador de Deepfakes', desc: 'Detecta mídias manipuladas.' },
+                        { title: 'Oficial de Risco em Biohacking', desc: 'Gerencia riscos de biologia DIY.' },
+                        { title: 'Designer de Simulações de Desastres', desc: 'Cria modelos de treinamento para crises.' },
+                        { title: 'Guardião de Identidade Digital', desc: 'Protege identidades pessoais online.' },
+                        { title: 'Planejador de Resiliência de Infraestrutura', desc: 'Protege sistemas essenciais contra choques.' },
+                        { title: 'Regulador de Segurança em VR', desc: 'Previne danos em ambientes virtuais.' },
+                        { title: 'Especialista em Seguro de Riscos Climáticos', desc: 'Cria seguros para impactos climáticos.' }
+                    ]
+                },
+                'Educação & Desenvolvimento Humano': {
+                    insight: "A solução sistêmica descrita pela SSIR ganha vida aqui. Diplomas fixos desmoronam, dando lugar a gestores de credenciais dinâmicas, microcertificações ágeis e hiperpersonalização educacional via IA.",
+                    img: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop",
+                    jobs: [
+                        { title: 'Designer de Aprendizado com IA', desc: 'Cria lições personalizadas movidas por IA.' },
+                        { title: 'Coach de Aprendizado Contínuo', desc: 'Guia adultos em sua educação ao longo da vida.' },
+                        { title: 'Arquiteto de Salas de Aula Digitais', desc: 'Desenvolve plataformas de aprendizado online de nova geração.' },
+                        { title: 'Instrutor de Alfabetização para o Futuro', desc: 'Ensina pensamento de futuro e antecipação.' },
+                        { title: 'Especialista em Neurodiversidade', desc: 'Projeta ambientes de trabalho inclusivos.' },
+                        { title: 'Designer de Gamificação', desc: 'Usa jogos para motivar aprendizes.' },
+                        { title: 'Gerente de Microcertificações', desc: 'Administra sistemas de certificados digitais.' },
+                        { title: 'Facilitador de Ensino Híbrido Doméstico', desc: 'Integra ensino digital e presencial em casa.' },
+                        { title: 'Mentor de Etiqueta Digital', desc: 'Orienta sobre comportamento respeitoso online.' },
+                        { title: 'Coordenador de Robótica', desc: 'Supervisiona manutenção e treinamento técnico em robótica.' }
+                    ]
+                },
+                'Negócios e Economia': {
+                    insight: "Conforme o relatório do MIT evidencia, a engenharia de dados saiu dos bastidores para o Board. Profissões aqui traduzem a hiper-conectividade técnica em resultados puros de negócio e novos paradigmas tokenizados.",
+                    img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&auto=format&fit=crop",
+                    jobs: [
+                        { title: 'Diretor de Bem-Estar', desc: 'Implementa estratégias para melhorar a saúde e o bem-estar dos colaboradores.' },
+                        { title: 'Estrategista Web3', desc: 'Cria modelos de negócios baseados em blockchain.' },
+                        { title: 'Analista da Economia de Assinaturas', desc: 'Estuda modelos de pagamento por uso.' },
+                        { title: 'Corretor da Economia da Reputação', desc: 'Gerencia pontuações de confiança de pessoas e marcas.' },
+                        { title: 'Analista de Políticas de Moedas Digitais', desc: 'Define políticas e regulações sobre criptomoedas.' },
+                        { title: 'Gerente de Cadeia de Suprimentos Autônoma', desc: 'Supervisiona logística operada por IA.' },
+                        { title: 'Futurista de Talentos', desc: 'Prevê necessidades futuras de habilidades e tendências da força de trabalho.' },
+                        { title: 'Tradutor de Negócios em IA', desc: 'Conecta as necessidades das empresas com soluções baseadas em IA.' },
+                        { title: 'Agente de Influenciadores Virtuais', desc: 'Gerencia influenciadores digitais ou gerados por IA.' },
+                        { title: 'Diretor de Automação', desc: 'Supervisiona a implementação e gestão de processos automatizados.' }
+                    ]
+                },
+                'Artes, Mídia e Estilo de Vida': {
+                    insight: "A Competência da Criatividade (Delphi) é tensionada pela IA. O papel do artista passa de mero criador artesanal para um designer de narrativas imersivas e diretor de modelos generativos (GenAI).",
+                    img: "https://images.unsplash.com/photo-1541845157-a6d2d100c931?q=80&w=800&auto=format&fit=crop",
+                    jobs: [
+                        { title: 'Designer de Moda Virtual', desc: 'Cria roupas para mundos digitais.' },
+                        { title: 'Artista de Performance em Realidade Mista', desc: 'Combina apresentações reais e virtuais.' },
+                        { title: 'Designer de Tecnologia Háptica', desc: 'Desenvolve tecnologias de simulação tátil para jogos, treinamentos e uso remoto.' },
+                        { title: 'Especialista em Publicidade em RA', desc: 'Cria campanhas publicitárias interativas com realidade aumentada.' },
+                        { title: 'Desenvolvedor de Neurocinema', desc: 'Cria filmes interativos que se adaptam às respostas cerebrais do público.' },
+                        { title: 'Curador de Arte Gerada por IA', desc: 'Seleciona e apresenta obras criadas por IA em museus ou galerias.' },
+                        { title: 'Consultor de Narrativas Éticas', desc: 'Garante que histórias e campanhas evitem danos ou vieses.' },
+                        { title: 'Designer Neuroestético', desc: 'Cria ambientes que estimulam a criatividade.' },
+                        { title: 'Consultor de Minimalismo Digital', desc: 'Ajuda pessoas a reduzir a sobrecarga tecnológica.' },
+                        { title: 'Criador de Conteúdo Futurista', desc: 'Produz mídias que exploram tendências do futuro.' }
+                    ]
+                }
             };
 
-            // Dados dos Relatórios
             const reportsData = [
                 {
                     id: 'cni',
-                    title: 'Retratos da Sociedade Brasileira - CNI',
-                    author: 'CNI',
+                    title: 'Retratos da Sociedade Brasileira',
+                    author: 'CNI - Confederação Nacional da Indústria (2026)',
                     theme: 'bg-emerald-900 text-white border-emerald-950',
-                    synthesis: 'A pesquisa revela um paradoxo: trabalhadores estão acomodados no presente, mas 42,7% são incapazes de projetar sua carreira para daqui a cinco anos. O medo da falta de vagas e de experiência prática paralisa a visão de longo prazo.',
-                    insight: 'A paralisia do trabalhador exige que empresas atuem como bússolas, oferecendo rotas claras de requalificação (upskilling) para evitar uma crise de retenção e engajamento no curto prazo.'
+                    synthesis: 'A pesquisa revela um paradoxo social: embora satisfeitos com a estabilidade atual, 42,7% dos trabalhadores são incapazes de projetar sua carreira para daqui a cinco anos. O medo da falta de vagas estruturadas e de experiência prática paralisa a visão estratégica individual, prendendo a força de trabalho no curto prazo.',
+                    insight: 'A paralisia do trabalhador exige que empresas atuem como bússolas. Sem rotas claras de requalificação (upskilling), a insegurança diante da IA e automação causará uma crise de retenção, engajamento e produtividade na base produtiva do país.'
                 },
                 {
                     id: 'delphi',
-                    title: 'Mudanças nas Competências Básicas',
-                    author: 'Fraunhofer / Hamburgo',
-                    theme: 'bg-slate-900 text-white border-black',
-                    synthesis: 'Estudo Delphi com 34 especialistas mapeia como a IA altera as competências fundamentais. Habilidades de execução caem, enquanto Pensamento Crítico e Competência Ética disparam em relevância.',
-                    insight: 'O humano deixa de ser um executor de tarefas e passa a orquestrador de IA. O recrutamento deve focar na Tolerância à Ambiguidade e no Senso Crítico, superando a triagem por hard skills perecíveis.'
+                    title: 'Mudanças nas Competências na Era da IA',
+                    author: 'Schoëttl, Zeller-Lanzl & Gimpel (Fraunhofer, 2026)',
+                    theme: 'bg-slate-800 text-white border-slate-900',
+                    synthesis: 'Estudo Delphi com 34 especialistas mapeia como a IA altera fundamentos cognitivos. Habilidades de execução pura, memorização e traduções caem. Em contraste, "Pensamento Crítico", "Tolerância à Ambiguidade" e "Competência Ética" disparam em relevância como os maiores ativos do futuro.',
+                    insight: 'O ser humano deixa de ser um executor de tarefas e passa a ser orquestrador de IA. O RH deve abolir a triagem exclusiva por "hard skills" perecíveis e focar em profissionais capazes de operar na ambiguidade com alto rigor ético.'
                 },
                 {
                     id: 'mit',
                     title: 'Redefining Data Engineering',
-                    author: 'MIT Tech Review',
-                    theme: 'bg-black text-white border-gray-800',
-                    synthesis: 'A Engenharia de Dados deixou os bastidores de TI. Com 72% dos líderes a considerando essencial, esses profissionais agora moldam a estratégia de IA, lidando com volumes insanos de dados não estruturados.',
-                    insight: 'Tratar dados como função de suporte é atestar obsolescência. Engenheiros de dados são os arquitetos de negócios modernos, definindo os limites do que é viável na implementação da IA Agêntica.'
+                    author: 'Denis McCauley (MIT Tech Review, 2025)',
+                    theme: 'bg-gray-950 text-white border-black',
+                    synthesis: 'A Engenharia de Dados abandonou os bastidores. Com 72% dos líderes considerando-a essencial, a infraestrutura de dados agora dita a velocidade da IA. O tempo gasto por equipes focadas em IA saltou para 37% e baterá 61%, lidando com montanhas de dados não estruturados.',
+                    insight: 'Tratar dados como "função de suporte" é atestar a obsolescência de uma empresa. Os engenheiros de dados tornaram-se os novos arquitetos de negócios; eles definem os limites do que a inteligência artificial pode e não pode realizar na organização.'
                 },
                 {
                     id: 'futura',
                     title: '100 Profissões do Futuro',
-                    author: 'The Futura Lab',
-                    theme: 'bg-orange-900 text-white border-orange-950',
-                    synthesis: 'Mapeamento das carreiras emergentes nas interseções de IA, biotecnologia e sustentabilidade. A especialização extrema passa a cruzar obrigatoriamente com habilidades sociais transversais.',
-                    insight: 'Não estamos apenas automatizando, estamos criando novas categorias profissionais. O mercado precisa adotar micro-certificações ágeis para acompanhar profissões que nascem e morrem em ciclos curtos.'
+                    author: 'Martha Gabriel (The Futura Lab)',
+                    theme: 'bg-orange-800 text-white border-orange-950',
+                    synthesis: 'Um mapeamento robusto que prova que a automação não dizima o trabalho, mas o hiper-especializa. O catálogo revela carreiras emergentes nas interseções antes impensáveis de Inteligência Artificial, biotecnologia, exploração espacial e ecologia regenerativa.',
+                    insight: 'Não estamos apenas automatizando a economia; estamos criando taxonomias inteiramente novas. O mercado passará a exigir certificações curtas e constantes para acompanhar profissões que operam na fronteira da ciência e dados.'
                 },
                 {
                     id: 'ssir',
                     title: 'Uma nova porta de entrada',
-                    author: 'SSIR Brasil',
+                    author: 'Stanford Social Innovation Review (2025)',
                     theme: 'bg-red-900 text-white border-red-950',
-                    synthesis: 'A dependência de diplomas acadêmicos cria um gargalo artificial. Empregadores de ponta buscam "expertise latente" — habilidades práticas e adjacentes que o trabalhador possui, mas não são certificadas de forma tradicional.',
-                    insight: 'A contratação baseada em habilidades (skills-based hiring) e o uso de credenciais portáteis validadas por IA é o único caminho pragmático para unir as "Novas Profissões" à atual força de trabalho.'
+                    synthesis: 'A dependência histórica de diplomas acadêmicos de longo prazo criou um gargalo artificial na economia da IA. O mercado ágil exige "expertise latente" — habilidades práticas, adaptabilidade e competências adjacentes que o trabalhador vive, mas que universidades não certificam.',
+                    insight: 'A contratação baseada em habilidades (skills-based hiring) apoiada por microcredenciais é a única saída sustentável. Dinamitar o pedágio do diploma clássico é o que unirá a mão de obra paralisada (CNI) às 100 profissões do Futura Lab.'
                 }
             ];
 
@@ -227,87 +370,144 @@
                 <div className="font-sans text-brandDark bg-brandLight">
                     
                     {/* Header: Editorial Splash Cover */}
-                    <header className="relative w-full min-h-[70vh] flex flex-col justify-center bg-brandDark text-white pt-20 pb-16 px-6 md:px-12 overflow-hidden border-b-8 border-brandOrange">
-                        {/* Imagem de Fundo Elegante */}
+                    <header className="relative w-full min-h-[75vh] flex flex-col justify-center bg-brandDark text-white pt-24 pb-16 px-6 md:px-12 overflow-hidden border-b-[12px] border-brandOrange">
                         <div className="absolute inset-0 z-0">
-                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1920&auto=format&fit=crop" className="w-full h-full object-cover opacity-20" alt="Arquitetura de Escritório Moderna" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-brandDark via-brandDark/90 to-brandDark/40"></div>
+                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1920&auto=format&fit=crop" className="w-full h-full object-cover opacity-30" alt="Arquitetura de Escritório Moderna" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/90 to-[#0f172a]/40"></div>
                         </div>
 
                         <div className="relative z-10 max-w-5xl mx-auto w-full animate-fade-in">
-                            <div className="mb-8 border-l-4 border-brandCyan pl-4">
-                                <span className="font-sans font-bold tracking-[0.2em] uppercase text-xs text-brandCyan block mb-2">Relatório Especial • Foresight Estratégico</span>
-                                <span className="font-serif italic text-gray-300 text-sm">Uma análise transversal</span>
+                            <div className="mb-8 border-l-4 border-brandOrange pl-4">
+                                <span className="font-sans font-bold tracking-[0.2em] uppercase text-xs text-brandOrange block mb-2">Relatório Especial • Foresight Estratégico</span>
+                                <span className="font-serif italic text-gray-300 text-sm">Uma análise editorial transversal</span>
                             </div>
                             
-                            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold leading-[1.1] mb-6 tracking-tight">
-                                O Futuro <br/> <span className="text-gray-200">do Trabalho.</span>
+                            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold leading-[1.05] mb-6 tracking-tight drop-shadow-xl text-white">
+                                O Futuro <br/> <span className="text-gray-300 font-light">do Trabalho.</span>
                             </h1>
                             
-                            <h2 className="text-xl md:text-2xl font-light text-gray-200 leading-relaxed max-w-3xl mb-8 font-sans">
-                                Como a IA Agêntica, as pressões climáticas e as novas taxonomias de habilidades estão redesenhando o cenário corporativo global.
+                            <h2 className="text-xl md:text-2xl font-light text-gray-200 leading-relaxed max-w-3xl mb-10 font-sans">
+                                Como a IA Agêntica, as pressões climáticas e as novas taxonomias de habilidades (skills) estão reescrevendo o DNA corporativo global.
                             </h2>
                             
-                            <div className="flex flex-wrap items-center gap-4 text-xs font-sans text-gray-300 uppercase tracking-widest border-t border-gray-700 pt-6">
-                                <span>Fontes: CNI</span>
+                            <div className="flex flex-wrap items-center gap-4 text-xs font-sans text-gray-400 uppercase tracking-widest border-t border-gray-700 pt-6">
+                                <span className="text-white font-medium">Fontes:</span>
+                                <span>CNI</span>
                                 <span className="text-brandOrange">•</span>
-                                <span>Delphi Study</span>
+                                <span>Estudo Delphi</span>
                                 <span className="text-brandOrange">•</span>
                                 <span>MIT Tech Review</span>
                                 <span className="text-brandOrange">•</span>
                                 <span>SSIR</span>
+                                <span className="text-brandOrange">•</span>
+                                <span>The Futura Lab</span>
                             </div>
                         </div>
                     </header>
 
+                    {}
                     <main className="max-w-5xl mx-auto px-6 py-16">
                         
                         {/* Section 1: Incerteza (CNI) */}
                         <section className="mb-20 animate-fade-in">
                             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
-                                {/* Coluna Principal (Texto) */}
                                 <div className="md:col-span-7">
-                                    <h3 className="font-serif text-3xl md:text-5xl font-bold mb-6 tracking-tight text-brandDark">A Epidemia do Curto Prazo</h3>
-                                    <p className="text-xs font-bold uppercase tracking-widest text-brandOrange mb-8 border-b border-gray-200 pb-2 inline-block">Perspectiva: Sociedade Brasileira</p>
+                                    <h3 className="font-serif text-4xl md:text-5xl font-bold mb-6 tracking-tight text-brandDark leading-tight">A Epidemia do Curto Prazo</h3>
+                                    <p className="text-xs font-bold uppercase tracking-widest text-brandOrange mb-8 border-b border-gray-200 pb-2 inline-block">Perspectiva: Retratos da Sociedade (CNI)</p>
                                     
                                     <DidacticIntro 
-                                        text="A transformação do trabalho não começa nos laboratórios do Vale do Silício; ela esbarra, primeiro, na percepção psicológica do trabalhador comum. A recente pesquisa da CNI expõe uma dicotomia preocupante na base da pirâmide produtiva."
+                                        text="A transformação do trabalho não começa nos laboratórios do Vale do Silício; ela colide, primeiro, na percepção psicológica do trabalhador comum. A recente pesquisa da CNI expõe uma dicotomia preocupante na base produtiva."
                                     />
                                     
-                                    <p className="text-gray-800 font-sans leading-relaxed mb-6 font-medium">
-                                        Enquanto o mercado corporativo debate a implementação de inteligências artificiais autônomas, uma imensa parcela da força de trabalho encontra-se paralisada frente ao próprio futuro, incapaz de visualizar sua trajetória além do horizonte de cinco anos. O medo crônico da falta de vagas e a sensação de déficit em experiência prática congelam a visão estratégica individual.
+                                    <p className="text-gray-800 font-sans leading-relaxed mb-6 font-medium text-lg">
+                                        Enquanto o mercado corporativo debate a implementação de inteligências artificiais autônomas (agênticas), uma imensa parcela da força de trabalho encontra-se paralisada frente ao próprio futuro, incapaz de visualizar sua trajetória além do horizonte de cinco anos. O medo crônico da falta de vagas e a sensação de déficit em experiência prática congelam a visão estratégica individual.
                                     </p>
 
                                     <div className="bg-white p-8 border border-gray-200 shadow-sm mt-8 editorial-card">
                                         <h4 className="font-serif text-xl font-bold mb-6 text-brandDark">Prioridades Imediatas vs. Longo Prazo</h4>
-                                        <div className="space-y-5 font-sans">
+                                        <div className="space-y-6 font-sans">
                                             <div>
-                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-700"><span>Salário / Rendimento</span><span className="font-bold text-brandDark">28,7%</span></div>
-                                                <div className="w-full bg-gray-200 h-1.5"><div className="bg-brandDark h-1.5" style={{width: '28.7%'}}></div></div>
+                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-700"><span>Salário / Rendimento</span><span className="font-bold text-brandDark text-sm">28,7%</span></div>
+                                                <div className="w-full bg-gray-200 h-2"><div className="bg-brandDark h-2" style={{width: '28.7%'}}></div></div>
                                             </div>
                                             <div>
-                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-700"><span>Estabilidade no Emprego</span><span className="font-bold text-brandOrange">22,4%</span></div>
-                                                <div className="w-full bg-gray-200 h-1.5"><div className="bg-brandOrange h-1.5" style={{width: '22.4%'}}></div></div>
+                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-700"><span>Estabilidade no Emprego</span><span className="font-bold text-brandOrange text-sm">22,4%</span></div>
+                                                <div className="w-full bg-gray-200 h-2"><div className="bg-brandOrange h-2" style={{width: '22.4%'}}></div></div>
                                             </div>
                                             <div>
-                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-700"><span>Perspectiva de Crescimento</span><span className="font-bold text-brandCyan">20,1%</span></div>
-                                                <div className="w-full bg-gray-200 h-1.5"><div className="bg-brandCyan h-1.5" style={{width: '20.1%'}}></div></div>
+                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-700"><span>Perspectiva de Crescimento</span><span className="font-bold text-brandCyanDark text-sm">20,1%</span></div>
+                                                <div className="w-full bg-gray-200 h-2"><div className="bg-brandCyanDark h-2" style={{width: '20.1%'}}></div></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Coluna Lateral (Destaques e Imagem) */}
                                 <div className="md:col-span-5 flex flex-col h-full">
                                     <MagazineImage 
                                         src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop" 
-                                        alt="Análise de dados corporativos"
-                                        caption="Dados revelam paralisia em planejamento de carreira a médio prazo."
+                                        alt="Reunião de análise estratégica corporativa"
+                                        caption="Métricas da CNI expõem paralisia em planejamento de carreira."
                                     />
-                                    <div className="mt-8 bg-gray-50 p-6 border-l-2 border-brandDark">
-                                        <span className="text-6xl font-serif font-black text-brandOrange block leading-none mb-2">42,7%</span>
-                                        <p className="text-sm font-sans text-gray-800 uppercase tracking-wide font-bold">Dos brasileiros não conseguem responder em qual ocupação se veem trabalhando daqui a cinco anos.</p>
+                                    <div className="mt-8 bg-gray-100 p-8 border-l-4 border-brandDark shadow-sm">
+                                        <span className="text-6xl font-serif font-black text-brandOrange block leading-none mb-3">42,7%</span>
+                                        <p className="text-sm font-sans text-gray-800 uppercase tracking-wide font-bold leading-relaxed">Da população não consegue responder em qual ocupação se vê trabalhando daqui a cinco anos.</p>
                                     </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <SectionDivider />
+
+                        {/* Section 2: Competências (Delphi) */}
+                        <section className="mb-20 animate-fade-in">
+                            <div className="text-center max-w-3xl mx-auto mb-16">
+                                <h3 className="font-serif text-4xl md:text-5xl font-bold mb-6 tracking-tight text-brandDark">A Metamorfose Cognitiva</h3>
+                                <p className="text-xs font-bold uppercase tracking-widest text-brandOrange mb-6 border-b border-gray-200 pb-2 inline-block">Estudo Delphi: Fraunhofer & Universidade de Hamburgo</p>
+                                
+                                <p className="text-lg text-gray-800 font-medium leading-relaxed">
+                                    Se o trabalhador está paralisado no tempo (CNI), as exigências cognitivas das máquinas avançam de forma assimétrica. O Estudo Delphi com 34 especialistas globais revela que a divisão do trabalho humano-máquina mudou de forma irrevogável.
+                                </p>
+                            </div>
+
+                            <div className="grid md:grid-cols-3 gap-8">
+                                {/* Funcionais */}
+                                <div className="bg-white p-8 border border-gray-200 editorial-card group">
+                                    <h4 className="font-serif font-bold text-2xl text-brandDark mb-4 flex items-center justify-between border-b border-gray-200 pb-4">
+                                        Funcionais <span className="text-sm font-sans font-black text-gray-400 bg-gray-100 px-2 py-1">Misto</span>
+                                    </h4>
+                                    <p className="text-gray-800 text-sm leading-relaxed font-medium mb-4">
+                                        Habilidades duras (hard skills) e mecânicas tornam-se voláteis. A <strong>Competência Digital</strong> explode como pré-requisito básico. 
+                                    </p>
+                                    <p className="text-gray-600 text-sm leading-relaxed italic border-l-2 border-gray-300 pl-3">
+                                        Por outro lado, redação básica e domínio raso de línguas estrangeiras perdem tração devido à alta fluência dos modelos de tradução generativa.
+                                    </p>
+                                </div>
+
+                                {/* Metodológicas */}
+                                <div className="bg-white p-8 border-t-4 border-brandDark shadow-lg editorial-card transform md:-translate-y-4">
+                                    <h4 className="font-serif font-bold text-2xl text-brandDark mb-4 flex items-center justify-between border-b border-gray-200 pb-4">
+                                        Metodológicas <span className="text-sm font-sans font-black text-brandOrange bg-orange-50 px-2 py-1">Alta Relevância</span>
+                                    </h4>
+                                    <p className="text-gray-800 text-sm leading-relaxed font-medium mb-4">
+                                        O maior salto estratégico ocorre aqui. O ser humano não é mais o executor, mas o arquiteto da máquina.
+                                    </p>
+                                    <div className="space-y-3">
+                                        <div className="bg-gray-50 p-3 rounded border border-gray-200"><span className="font-bold text-brandDark block text-sm">Pensamento Crítico</span><span className="text-xs text-gray-600">Para auditar e duvidar da IA.</span></div>
+                                        <div className="bg-gray-50 p-3 rounded border border-gray-200"><span className="font-bold text-brandDark block text-sm">Resolução de Problemas</span><span className="text-xs text-gray-600">Modelagem abstrata de processos.</span></div>
+                                    </div>
+                                </div>
+
+                                {/* Pessoais & Sociais */}
+                                <div className="bg-white p-8 border border-gray-200 editorial-card group">
+                                    <h4 className="font-serif font-bold text-2xl text-brandDark mb-4 flex items-center justify-between border-b border-gray-200 pb-4">
+                                        Sócio-Éticas <span className="text-sm font-sans font-black text-brandCyanDark bg-cyan-50 px-2 py-1">Diferencial</span>
+                                    </h4>
+                                    <p className="text-gray-800 text-sm leading-relaxed font-medium mb-4">
+                                        O reduto insubstituível. Enquanto robôs executam lógicas avançadas, a <strong>Tolerância à Ambiguidade</strong> e a Empatia mantêm as equipes sãs.
+                                    </p>
+                                    <p className="text-gray-600 text-sm leading-relaxed italic border-l-2 border-brandCyan pl-3">
+                                        A <strong>Competência Ética</strong> torna-se o novo compliance: guiar o moral compass de IAs corporativas.
+                                    </p>
                                 </div>
                             </div>
                         </section>
@@ -316,43 +516,43 @@
 
                         {/* Section 3: Engenharia de Dados (MIT) */}
                         <section className="mb-20 animate-fade-in">
-                            <div className="bg-brandDark text-white p-8 md:p-16 relative overflow-hidden">
-                                <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
-                                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1920&auto=format&fit=crop" className="w-full h-full object-cover" alt="Data Center" />
+                            <div className="bg-[#0f172a] text-white p-8 md:p-16 relative overflow-hidden shadow-2xl">
+                                <div className="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none">
+                                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1920&auto=format&fit=crop" className="w-full h-full object-cover mix-blend-luminosity" alt="Data Center Moderno" />
                                 </div>
                                 
                                 <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12">
                                     <div>
-                                        <h3 className="font-serif text-3xl md:text-5xl font-bold mb-6 tracking-tight text-white">Os Novos Arquitetos do Poder</h3>
-                                        <p className="text-xs font-bold uppercase tracking-widest text-brandOrange mb-8 border-b border-gray-700 pb-2 inline-block">Perspectiva: Vanguardas de TI (MIT)</p>
+                                        <h3 className="font-serif text-4xl md:text-5xl font-bold mb-6 tracking-tight text-white leading-tight">Os Arquitetos do Poder</h3>
+                                        <p className="text-xs font-bold uppercase tracking-widest text-brandOrange mb-8 border-b border-gray-700 pb-2 inline-block">Insight: MIT Tech Review (2025)</p>
 
                                         <DidacticIntro 
-                                            text="Na linha de frente da transformação prevista pelo estudo Delphi, o MIT identifica a mutação de uma carreira outrora operacional. A Engenharia de Dados não é mais sobre manter o 'encanamento' dos servidores."
+                                            text="Enquanto as competências metodológicas sobem de valor, uma profissão que operava nos bastidores corporativos assume o manche. A Engenharia de Dados deixou o porão."
                                         />
                                         
-                                        <div className="relative mt-8 bg-black/60 p-8 border border-gray-700 backdrop-blur-sm shadow-xl">
-                                            <IconQuote />
-                                            <p className="font-serif italic text-lg leading-relaxed relative z-10 text-white font-medium">
-                                                Se a sua alta administração ainda considera a engenharia de dados como uma função de suporte, você já está cinco anos atrasado - e provavelmente treinando seus futuros concorrentes.
+                                        <div className="relative mt-10 bg-black/50 p-8 border border-gray-700 backdrop-blur-md shadow-xl">
+                                            <svg className="w-10 h-10 text-brandOrange opacity-50 absolute -top-4 -left-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                                            <p className="font-serif italic text-xl leading-relaxed relative z-10 text-gray-100 font-medium">
+                                                Se a sua alta administração ainda considera a engenharia de dados como uma função de suporte, você já está cinco anos atrasado - e provavelmente treinando seus concorrentes.
                                             </p>
-                                            <p className="text-xs uppercase tracking-widest text-brandCyan mt-4 font-bold">— Chris Child, VP Snowflake</p>
+                                            <p className="text-xs uppercase tracking-widest text-brandCyan mt-5 font-bold">— Chris Child, VP Snowflake</p>
                                         </div>
                                     </div>
 
                                     <div className="flex flex-col justify-center">
-                                        <p className="text-gray-200 font-sans leading-relaxed mb-10 font-medium">
-                                            Com o advento da IA Agêntica (sistemas capazes de agir autonomamente), a alimentação desses modelos exige o tratamento de volumes colossais de dados não-estruturados. Os engenheiros de dados agora sentam nas mesas de diretoria, ditando os limites do que a inteligência do negócio pode ou não alcançar.
+                                        <p className="text-gray-300 font-sans leading-relaxed mb-10 font-medium text-lg">
+                                            Com o advento da IA Agêntica (sistemas capazes de agir autonomamente), o "petróleo" agora são volumes colossais de dados não-estruturados. Os engenheiros sentam nas mesas de diretoria ditando os limites do que a inteligência da empresa pode alcançar.
                                         </p>
 
-                                        <h4 className="font-serif text-2xl font-bold mb-6 text-brandCyan">Produtividade Acelerada pela IA</h4>
+                                        <h4 className="font-serif text-2xl font-bold mb-6 text-brandCyan">A Alavanca da IA (Ganhos de Equipe)</h4>
                                         <div className="space-y-6">
                                             <div>
-                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-300"><span>Melhoria na Qualidade do Código/Trabalho</span><span className="font-bold text-white">77%</span></div>
-                                                <div className="w-full bg-gray-800 h-1"><div className="bg-brandOrange h-1" style={{width: '77%'}}></div></div>
+                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-400"><span>Melhoria na Qualidade (Pipeline e Limpeza)</span><span className="font-bold text-white text-sm">77%</span></div>
+                                                <div className="w-full bg-gray-800 h-2 rounded"><div className="bg-brandOrange h-2 rounded" style={{width: '77%'}}></div></div>
                                             </div>
                                             <div>
-                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-300"><span>Aumento no Volume de Entregas</span><span className="font-bold text-white">74%</span></div>
-                                                <div className="w-full bg-gray-800 h-1"><div className="bg-brandCyan h-1" style={{width: '74%'}}></div></div>
+                                                <div className="flex justify-between text-xs uppercase tracking-wide mb-2 text-gray-400"><span>Aumento no Volume de Entregas (Outputs)</span><span className="font-bold text-white text-sm">74%</span></div>
+                                                <div className="w-full bg-gray-800 h-2 rounded"><div className="bg-brandCyanDark h-2 rounded" style={{width: '74%'}}></div></div>
                                             </div>
                                         </div>
                                     </div>
@@ -362,102 +562,205 @@
 
                         <SectionDivider />
 
-                        {/* Section 4: As Novas Profissões (Futura Lab) */}
+                        {/* Section 4: O Apagão Estrutural (Foresight, PISA & Indústria) */}
                         <section className="mb-20 animate-fade-in">
-                            <div className="text-center max-w-3xl mx-auto mb-12">
-                                <h3 className="font-serif text-3xl md:text-5xl font-bold mb-6 tracking-tight text-brandDark">O Catálogo de Novas Profissões</h3>
-                                <p className="text-xs font-bold uppercase tracking-widest text-brandOrange mb-6 border-b border-gray-200 pb-2 inline-block">Perspectiva: The Futura Lab</p>
-                                
-                                <p className="text-lg text-gray-800 font-medium leading-relaxed">
-                                    Onde as novas competências éticas (Delphi) e o gerenciamento de dados complexos (MIT) se encontram? No catálogo das novas profissões. A automação oblitera o trabalho mecânico, mas faz nascer uma hiperespecialização nas fronteiras da biologia, clima e dados.
-                                </p>
+                            <div className="flex items-center space-x-4 mb-8">
+                                <div className="p-3 bg-red-100 rounded-sm text-red-700 border border-red-200">
+                                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                </div>
+                                <div>
+                                    <h3 className="text-4xl font-serif font-bold text-brandDark tracking-tight">O Apagão Estrutural: A Ameaça à Neoindustrialização</h3>
+                                    <p className="text-gray-500 uppercase tracking-widest text-xs font-bold mt-2">Cross-Reference: CNI, SENAI & Confea</p>
+                                </div>
                             </div>
 
-                            {/* Interactive Filter */}
-                            <div className="flex flex-wrap justify-center gap-3 mb-10">
+                            <DidacticIntro 
+                                text="Como o Brasil vai liderar as 100 Profissões do Futuro ou orquestrar os arquitetos de dados do MIT se o nosso alicerce educacional sofre uma crise silenciosa? A ambição de criar uma Nova Indústria de valor agregado choca-se de frente com o apagão tecnológico de base."
+                            />
+
+                            <div className="grid md:grid-cols-12 gap-10 items-center mb-10">
+                                <div className="md:col-span-7 space-y-6">
+                                    <div className="bg-white p-8 border-t-4 border-red-700 shadow-md editorial-card">
+                                        <h4 className="font-serif font-bold text-2xl text-brandDark mb-4">A Raiz do Problema: O Modelo Engessado e a Evasão STEM</h4>
+                                        <p className="text-gray-800 text-lg leading-relaxed font-medium mb-4">
+                                            As competências metodológicas exigidas pelo futuro da IA dependem de uma base sólida em <strong>STEM</strong> (Ciências, Tecnologia, Engenharia e Matemática). Contudo, o Brasil enfrenta um descompasso estrutural: modelos curriculares excessivamente teóricos e defasados geram uma desconexão com a realidade prática, desmotivando talentos e resultando em altíssima evasão no ensino superior.
+                                        </p>
+                                        <p className="text-gray-600 text-base leading-relaxed font-serif italic border-l-2 border-red-700 pl-3">
+                                            O "sintoma" se reflete imediatamente na indústria: enquanto o mercado demanda fluência digital rápida, os cursos de Engenharia e Tecnologia amargam queda de matrículas (redução de 30% em uma década). O <strong>Confea e a CNI</strong> projetam um déficit agudo que pode chegar a <strong>1 milhão de engenheiros e profissionais tecnológicos em falta até 2030</strong>.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="md:col-span-5 h-full">
+                                    <MagazineImage 
+                                        src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop" 
+                                        alt="Engenharia de precisão e escassez de talentos na indústria"
+                                        caption="Déficit de Engenheiros ameaça a transição para a Indústria 4.0 no Brasil."
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="bg-brandDark p-8 md:p-12 border-b-8 border-brandOrange shadow-xl relative overflow-hidden mt-8">
+                                <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
+                                    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1920&auto=format&fit=crop" className="w-full h-full object-cover mix-blend-screen" alt="Robótica e Neoindustrialização" />
+                                </div>
+                                
+                                <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                                    <div>
+                                        <h4 className="text-3xl font-serif font-bold text-white mb-6 leading-tight">Da Armadilha das Commodities à <span className="text-brandOrange">Neoindustrialização</span></h4>
+                                        <p className="text-gray-300 text-lg leading-relaxed mb-6 font-medium">
+                                            Sem reverter esse déficit, o Brasil corre o risco de permanecer acorrentado ao papel de mero <strong>"ofertante de commodities"</strong> (produtos primários sem alto valor agregado tecnológico).
+                                        </p>
+                                        <p className="text-gray-400 text-base leading-relaxed">
+                                            Para digitalizar a economia, liderar a descarbonização global e construir complexos sustentáveis (as diretrizes da Nova Indústria Brasil), o país não pode depender da inércia. As inovações tecnológicas correm o risco real de se tornarem infraestruturas fantasmas por falta de <strong>mão de obra humana capacitada</strong> para operá-las.
+                                        </p>
+                                    </div>
+                                    <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-sm">
+                                        <h5 className="font-bold text-brandCyan uppercase tracking-widest text-xs mb-5 border-b border-white/10 pb-3">Estratégias de Intervenção Rápida</h5>
+                                        <ul className="space-y-5">
+                                            <li className="flex items-start gap-4">
+                                                <span className="flex-shrink-0 w-8 h-8 rounded-sm bg-brandOrange text-white flex items-center justify-center font-bold font-serif">1</span>
+                                                <p className="text-sm text-gray-200 leading-relaxed"><strong className="text-white block mb-1">Formação Ágil e Híbrida de Engenheiros:</strong> Modernizar os currículos universitários implementando modelos modulares e híbridos (teoria + simulação virtual). Uma forte integração (dual) com o setor produtivo acelera a inserção no mercado, mitigando a evasão sem perder o rigor analítico.</p>
+                                            </li>
+                                            <li className="flex items-start gap-4">
+                                                <span className="flex-shrink-0 w-8 h-8 rounded-sm bg-brandCyanDark text-white flex items-center justify-center font-bold font-serif">2</span>
+                                                <p className="text-sm text-gray-200 leading-relaxed"><strong className="text-white block mb-1">Cursos Técnicos "Hands-on":</strong> A Neoindustrialização não exige apenas bacharéis, mas um exército técnico. Priorizar formações imersivas, práticas e de curtíssimo prazo direcionadas diretamente para operar as Novas Profissões (ex: técnicos em robótica, operadores de IoT e IA).</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <SectionDivider />
+
+                        {/* Section 5: O Fim do Dilema do Diploma (SSIR) */}
+                        <section className="mb-20 animate-fade-in">
+                            <div className="bg-brandLight border-2 border-brandDark p-8 md:p-12 shadow-lg relative">
+                                <div className="flex items-center space-x-4 mb-6">
+                                    <div className="p-3 bg-brandDark text-white rounded-sm">
+                                        <IconUser />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-3xl md:text-4xl font-serif font-bold text-brandDark tracking-tight">O Fim do Dilema do Diploma</h3>
+                                        <p className="text-gray-500 uppercase tracking-widest text-xs font-bold mt-2">Fonte: Stanford Social Innovation Review (SSIR)</p>
+                                    </div>
+                                </div>
+                                
+                                <DidacticIntro 
+                                    text="A solução sistêmica para a incerteza do trabalhador (CNI) e a complexidade técnica exigida pelo mercado (MIT) reside em uma mudança fundamental: a porta de entrada."
+                                />
+
+                                <div className="grid md:grid-cols-2 gap-10 mt-8">
+                                    <div>
+                                        <p className="text-gray-800 text-lg leading-relaxed font-medium mb-6">
+                                            A dependência histórica de diplomas acadêmicos tradicionais criou um gargalo artificial na economia moderna. O mercado ágil da IA exige <strong className="text-brandOrange">"expertise latente"</strong> — habilidades práticas e adaptabilidade que o trabalhador vive, mas que o pedágio do diploma de 4 anos não certifica a tempo.
+                                        </p>
+                                        <div className="bg-brandDark p-6 text-white border-l-4 border-brandOrange">
+                                            <h4 className="font-bold uppercase tracking-widest text-xs mb-2 text-brandCyan">A Transição Necessária</h4>
+                                            <p className="font-serif italic text-lg">A contratação baseada em habilidades (skills-based hiring) apoiada por microcredenciais é a única saída para unir a mão de obra paralisada às profissões de fronteira.</p>
+                                        </div>
+                                    </div>
+                                    <div className="space-y-4">
+                                        <div className="p-4 border border-gray-300 bg-white shadow-sm flex items-start gap-4">
+                                            <span className="text-brandCyan font-bold text-xl">01</span>
+                                            <p className="text-sm text-gray-700"><strong>Desconstrução do Cargo:</strong> Focar em tarefas (tasks) e nas competências reais necessárias para executá-las, não em títulos universitários.</p>
+                                        </div>
+                                        <div className="p-4 border border-gray-300 bg-white shadow-sm flex items-start gap-4">
+                                            <span className="text-brandOrange font-bold text-xl">02</span>
+                                            <p className="text-sm text-gray-700"><strong>Microcredenciais Dinâmicas:</strong> Certificações curtas e constantes (bootcamps, cursos corporativos) que atestam a expertise latente do indivíduo.</p>
+                                        </div>
+                                        <div className="p-4 border border-gray-300 bg-white shadow-sm flex items-start gap-4">
+                                            <span className="text-brandDark font-bold text-xl">03</span>
+                                            <p className="text-sm text-gray-700"><strong>Contratação por Habilidades:</strong> Avaliar o portfólio prático e a capacidade de resolução de problemas (Competência Metodológica) acima da formação clássica.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <SectionDivider />
+
+                        {/* Section 6: O Catálogo de Novas Profissões (Futura Lab) */}
+                        <section className="mb-20 animate-fade-in">
+                            <div className="flex items-center space-x-4 mb-8">
+                                <div className="p-3 bg-brandDark text-white rounded-sm">
+                                    <IconGlobe />
+                                </div>
+                                <div>
+                                    <h3 className="text-4xl font-serif font-bold text-brandDark tracking-tight">As 100 Profissões do Futuro</h3>
+                                    <p className="text-gray-500 uppercase tracking-widest text-xs font-bold mt-2">Fonte: The Futura Lab (Martha Gabriel)</p>
+                                </div>
+                            </div>
+                            
+                            <div className="max-w-4xl mb-12">
+                                <DidacticIntro 
+                                    text="A automação não dizima o trabalho; ela o hiper-especializa. O mapeamento abaixo revela as carreiras emergentes nas interseções de IA, biotecnologia e ecologia. Estas são as ocupações que exigirão as microcertificações (SSIR) e a agilidade (Delphi) para as quais precisamos preparar a base produtiva (CNI)."
+                                />
+                            </div>
+
+                            {/* Menu de Categorias (Abas Horizontais com Scroll) */}
+                            <div className="flex overflow-x-auto pb-4 mb-10 gap-3 scrollbar-hide snap-x" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
                                 {Object.keys(jobCategories).map((cat) => (
                                     <button 
                                         key={cat}
                                         onClick={() => setActiveCategory(cat)}
-                                        className={`px-5 py-2 text-xs font-bold tracking-widest uppercase transition-all duration-300 ${activeCategory === cat ? 'bg-brandDark text-white shadow-md' : 'bg-white text-gray-800 border border-gray-400 hover:border-brandDark hover:bg-gray-100 shadow-sm'}`}
+                                        className={`flex-shrink-0 snap-start px-6 py-3 text-xs md:text-sm font-bold tracking-widest uppercase transition-all duration-300 rounded-sm border ${
+                                            activeCategory === cat 
+                                            ? 'bg-brandDark text-white border-brandDark shadow-lg' 
+                                            : 'bg-white text-gray-600 border-gray-300 hover:border-brandOrange hover:text-brandOrange shadow-sm'
+                                        }`}
                                     >
                                         {cat}
                                     </button>
                                 ))}
                             </div>
 
-                            {/* Dynamic Job Cards with Photos */}
-                            <div className="grid md:grid-cols-3 gap-8">
-                                {jobCategories[activeCategory].map((job, idx) => (
-                                    <div key={idx} className="bg-white border border-gray-200 flex flex-col h-full editorial-card overflow-hidden group shadow-md">
-                                        <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-200">
-                                            <img src={job.img} alt={job.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy"/>
-                                            <div className="absolute top-0 left-0 bg-brandOrange text-white text-xs font-bold px-3 py-1 uppercase tracking-widest m-4 shadow">
-                                                0{idx + 1}
-                                            </div>
-                                        </div>
-                                        <div className="p-6 flex flex-col flex-grow bg-white">
-                                            <h4 className="font-serif font-bold text-xl text-brandDark mb-3 leading-snug">{job.title}</h4>
-                                            <p className="text-gray-800 text-sm font-sans leading-relaxed mt-auto font-medium">{job.desc}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
-
-                        <SectionDivider />
-
-                        {/* Section 5: A Nova Porta de Entrada (SSIR) */}
-                        <section className="mb-20 animate-fade-in">
-                            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
-                                <div className="md:col-span-6">
-                                    <h3 className="font-serif text-3xl md:text-5xl font-bold mb-6 tracking-tight text-brandDark">O Colapso do Diploma</h3>
-                                    <p className="text-xs font-bold uppercase tracking-widest text-brandOrange mb-8 border-b border-gray-200 pb-2 inline-block">A Solução Sistêmica (SSIR)</p>
-                                    
-                                    <DidacticIntro 
-                                        text="Como conectar a força de trabalho atual, paralisada pela incerteza (CNI), com um catálogo de profissões altamente sofisticadas (Futura Lab)? A resposta exige implodir o modelo educacional vigente."
-                                    />
-                                    
-                                    <p className="text-gray-800 font-sans leading-relaxed mb-6 font-medium">
-                                        O artigo da *Stanford Social Innovation Review* alerta: usar diplomas universitários como única "porta de entrada" gerou um gargalo ineficiente. Empregadores na vanguarda não buscam mais papéis carimbados; eles caçam <strong>expertise latente</strong> — habilidades práticas e adjacentes que o trabalhador possui, mas não são certificadas de forma tradicional.
-                                    </p>
-                                    
-                                    <CorrelationBlock 
-                                        sources="SSIR x Delphi"
-                                        title="A Morte da Hard Skill Formal"
-                                        text="Enquanto a academia prevê que habilidades puramente técnicas serão corroídas pela IA, a exigência de mercado corrobora essa visão: habilidades comportamentais e cognitivas serão as novas chaves de entrada."
-                                    />
-                                </div>
+                            {/* Painel da Categoria Ativa */}
+                            <div className="bg-white border border-gray-200 shadow-xl rounded-sm overflow-hidden animate-fade-in">
                                 
-                                <div className="md:col-span-6 space-y-4">
-                                    <h4 className="font-serif text-2xl font-bold mb-6 text-brandDark">Novos Princípios de Contratação</h4>
-                                    
-                                    <div className="bg-brandDark text-white p-6 border-l-4 border-brandCyan">
-                                        <span className="text-brandCyan font-bold text-lg block mb-1">01. Expertise Latente</span>
-                                        <p className="text-sm text-gray-300 font-light">Valorização de experiências vividas, resolução de problemas no dia a dia e resiliência, substituindo graduações formais.</p>
+                                {/* Banner Visual & Insight Estratégico do Bloco */}
+                                <div className="grid md:grid-cols-5 bg-brandDark">
+                                    <div className="md:col-span-2 relative aspect-video md:aspect-auto h-48 md:h-full">
+                                        <img src={jobCategories[activeCategory].img} alt={activeCategory} className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-screen" loading="lazy" />
+                                        <div className="absolute inset-0 bg-gradient-to-r from-brandDark/80 to-transparent"></div>
+                                        <div className="absolute bottom-6 left-6">
+                                            <h4 className="font-serif font-bold text-3xl text-white">{activeCategory}</h4>
+                                        </div>
                                     </div>
-                                    <div className="bg-brandDark text-white p-6 border-l-4 border-brandOrange">
-                                        <span className="text-brandOrange font-bold text-lg block mb-1">02. Foco na Prática</span>
-                                        <p className="text-sm text-gray-300 font-light">Aprendizagem baseada no trabalho torna-se o modelo padrão, servindo de escada rápida e validada para vagas abertas.</p>
+                                    <div className="md:col-span-3 p-8 md:p-10 flex flex-col justify-center border-l-4 border-brandOrange">
+                                        <span className="text-xs uppercase tracking-widest text-brandOrange font-bold mb-3 block">Foresight Estratégico (Cross-Reference)</span>
+                                        <p className="text-gray-200 font-serif italic text-lg leading-relaxed">
+                                            "{jobCategories[activeCategory].insight}"
+                                        </p>
                                     </div>
-                                    <div className="bg-brandDark text-white p-6 border-l-4 border-brandCyan">
-                                        <span className="text-brandCyan font-bold text-lg block mb-1">03. Contratação por Habilidades</span>
-                                        <p className="text-sm text-gray-300 font-light">Abandono de filtros por diploma. Avaliação baseada no desempenho, abrindo espaço para talentos de origens não-tradicionais.</p>
-                                    </div>
-                                    <div className="bg-brandDark text-white p-6 border-l-4 border-brandOrange">
-                                        <span className="text-brandOrange font-bold text-lg block mb-1">04. Credenciais Portáteis</span>
-                                        <p className="text-sm text-gray-300 font-light">Sistemas interoperáveis legíveis por IA onde o indivíduo carrega seu "histórico de habilidades" validado de forma imutável.</p>
+                                </div>
+
+                                {/* Lista das 10 Profissões (Grid Interno) */}
+                                <div className="p-8 md:p-12">
+                                    <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
+                                        {jobCategories[activeCategory].jobs.map((job, idx) => (
+                                            <div key={idx} className="flex gap-4 group">
+                                                <div className="flex-shrink-0 font-serif text-3xl font-black text-gray-200 group-hover:text-brandCyan transition-colors">
+                                                    {(idx + 1).toString().padStart(2, '0')}
+                                                </div>
+                                                <div>
+                                                    <h5 className="font-bold text-brandDark text-lg mb-1 leading-tight group-hover:text-brandOrange transition-colors">{job.title}</h5>
+                                                    <p className="text-gray-600 text-sm leading-relaxed">{job.desc}</p>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
                         </section>
 
+                        {}
                         {/* Interactive Acervo Section (Rodapé Editorial) */}
-                        <section className="mt-24 pt-16 border-t border-gray-300 relative">
+                        <section className="mt-28 pt-16 border-t border-gray-300 relative z-0">
                             <div className="text-center mb-16">
-                                <h3 className="text-3xl font-serif font-bold text-brandDark mb-4">Acervo Digital & Síntese</h3>
-                                <p className="text-gray-500 font-serif italic max-w-2xl mx-auto text-sm">
-                                    Clique nos dossiês abaixo para revelar os insights originais e as recomendações estratégicas consolidadas de cada fonte.
+                                <h3 className="text-3xl md:text-4xl font-serif font-bold text-brandDark mb-4">Acervo Digital & Síntese</h3>
+                                <p className="text-gray-600 font-serif italic max-w-2xl mx-auto text-base">
+                                    Clique nos dossiês abaixo para revelar as sínteses executivas e os insights originais de cada publicação citada nesta reportagem.
                                 </p>
                             </div>
 
@@ -466,9 +769,8 @@
                                     <div 
                                         key={report.id} 
                                         onClick={() => setActiveReport(activeReport === report.id ? null : report.id)}
-                                        className={`cursor-pointer transform transition-all duration-500 hover:-translate-y-4 relative ${activeReport === report.id ? 'scale-105 z-30 shadow-2xl ring-2 ring-brandDark ring-offset-4' : 'scale-100 shadow-md'}`}
+                                        className={`cursor-pointer transform transition-all duration-500 hover:-translate-y-4 relative ${activeReport === report.id ? 'scale-105 z-30 shadow-2xl ring-4 ring-brandOrange ring-offset-4' : 'scale-100 shadow-md'}`}
                                     >
-                                        {/* "Capa de Relatório" CSS */}
                                         <div className={`aspect-[3/4] overflow-hidden relative flex flex-col p-4 md:p-5 ${report.theme}`}>
                                             <div className="book-spine"></div>
                                             <div className="relative z-10 flex-grow flex flex-col justify-between">
@@ -477,8 +779,8 @@
                                                     <h4 className="font-serif font-bold leading-snug text-sm md:text-lg">{report.title}</h4>
                                                 </div>
                                                 <div className="self-end mt-4">
-                                                    <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center bg-white/5 backdrop-blur-sm">
-                                                        <span className="text-xs">+</span>
+                                                    <div className={`w-8 h-8 rounded-full border border-white/30 flex items-center justify-center bg-white/5 backdrop-blur-sm transition-transform ${activeReport === report.id ? 'rotate-45' : ''}`}>
+                                                        <span className="text-xs font-bold">+</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -487,12 +789,11 @@
                                 ))}
                             </div>
 
-                            {/* Detalhe do Relatório Selecionado (Painel Expansivo) */}
                             {activeReport && (
-                                <div className="bg-white border-y border-brandDark shadow-2xl p-8 md:p-12 animate-fade-in relative z-10 mt-8 mb-16 overflow-hidden">
+                                <div className="bg-white border-y-4 border-brandOrange shadow-2xl p-8 md:p-14 animate-fade-in relative z-10 mt-8 mb-16 overflow-hidden">
                                     <button 
                                         onClick={() => setActiveReport(null)}
-                                        className="absolute top-6 right-6 text-gray-400 hover:text-brandOrange uppercase text-xs tracking-widest font-bold transition-colors z-20"
+                                        className="absolute top-6 right-6 text-gray-400 hover:text-brandDark uppercase text-xs tracking-widest font-bold transition-colors z-20"
                                     >
                                         [ Fechar Painel ]
                                     </button>
@@ -500,18 +801,18 @@
                                     {reportsData.map((report) => report.id === activeReport && (
                                         <div key={`detail-${report.id}`} className="grid md:grid-cols-2 gap-12 relative">
                                             <div className="flex flex-col justify-center">
-                                                <span className="text-xs font-bold uppercase tracking-widest text-brandCyan mb-2">{report.author}</span>
+                                                <span className="text-xs font-bold uppercase tracking-widest text-brandCyanDark mb-2">{report.author}</span>
                                                 <h4 className="text-3xl md:text-4xl font-serif font-bold text-brandDark mb-8 leading-tight">{report.title}</h4>
                                                 
                                                 <h5 className="font-bold text-brandDark uppercase tracking-widest text-xs mb-3 border-b border-gray-200 pb-2">Síntese Documental</h5>
-                                                <p className="text-gray-600 font-sans leading-relaxed mb-8 md:mb-0">{report.synthesis}</p>
+                                                <p className="text-gray-800 font-sans leading-relaxed text-lg mb-8 md:mb-0 font-medium">{report.synthesis}</p>
                                             </div>
                                             
-                                            <div className="bg-brandLight p-8 border-l-4 border-brandOrange h-full flex flex-col justify-center">
-                                                <h5 className="font-bold text-brandOrange uppercase tracking-widest text-xs mb-4 flex items-center">
+                                            <div className="bg-gray-50 p-8 md:p-10 border-l-4 border-brandOrange h-full flex flex-col justify-center shadow-inner">
+                                                <h5 className="font-bold text-brandOrange uppercase tracking-widest text-xs mb-5 flex items-center">
                                                     Insight Estratégico (Foresight)
                                                 </h5>
-                                                <p className="text-gray-800 leading-relaxed font-serif text-lg md:text-xl italic">"{report.insight}"</p>
+                                                <p className="text-gray-800 leading-relaxed font-serif text-xl md:text-2xl italic font-bold">"{report.insight}"</p>
                                             </div>
                                         </div>
                                     ))}
@@ -522,23 +823,23 @@
                     </main>
 
                     {/* Footer Clean Editorial */}
-                    <footer className="bg-brandDark text-gray-200 py-16 px-6 text-center border-t border-gray-700 shadow-inner">
+                    <footer className="bg-brandDark text-gray-200 py-16 px-6 text-center border-t border-gray-800 shadow-inner mt-10">
                         <div className="max-w-4xl mx-auto">
-                            <h5 className="text-white font-serif font-bold text-xl mb-6">Referências Bibliográficas</h5>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-sans text-left text-gray-300 mb-12">
-                                <p><strong className="text-white">CNI (2026):</strong> Retratos da Sociedade Brasileira - CNI: Futuro Profissional.</p>
-                                <p><strong className="text-white">Estudo Delphi (2026):</strong> Fundamentos para o Futuro - Mudanças nas Competências na Era da IA.</p>
-                                <p><strong className="text-white">MIT Tech Review & Snowflake (2025):</strong> Redefinindo a Engenharia de Dados na Era da IA.</p>
-                                <p><strong className="text-white">The Futura Lab:</strong> 100 Profissões do Futuro (Martha Gabriel).</p>
+                            <h5 className="text-white font-serif font-bold text-2xl mb-8">Referências Bibliográficas</h5>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-sans text-left text-gray-400 mb-12">
+                                <p><strong className="text-white">CNI (2026):</strong> Retratos da Sociedade Brasileira: Futuro Profissional.</p>
+                                <p><strong className="text-white">Estudo Delphi (2026):</strong> Fundamentos para o Futuro - Mudanças nas Competências na Era da IA. (Schoëttl, Zeller-Lanzl, Gimpel).</p>
+                                <p><strong className="text-white">MIT Tech Review & Snowflake (2025):</strong> Redefinindo a Engenharia de Dados na Era da IA. (Denis McCauley).</p>
+                                <p><strong className="text-white">The Futura Lab:</strong> 100 Profissões do Futuro. (Martha Gabriel).</p>
                                 <p><strong className="text-white">SSIR Brasil (2025):</strong> Uma nova porta de entrada no mercado de trabalho na era da IA.</p>
                             </div>
                             
-                            <div className="pt-8 border-t border-gray-700 text-xs uppercase tracking-widest flex flex-col md:flex-row justify-center items-center gap-4 text-gray-400">
-                                <span className="text-gray-200">Design de Futuros</span>
-                                <span className="hidden md:inline text-brandOrange font-bold">•</span>
-                                <span className="text-gray-200">Reportagem Visual</span>
-                                <span className="hidden md:inline text-brandCyan font-bold">•</span>
-                                <span className="text-gray-200">React SPA</span>
+                            <div className="pt-10 border-t border-gray-800 text-xs uppercase tracking-widest flex flex-col md:flex-row justify-center items-center gap-6 text-gray-500 font-bold">
+                                <span className="hover:text-white transition-colors">Design de Futuros</span>
+                                <span className="hidden md:inline text-brandOrange">•</span>
+                                <span className="hover:text-white transition-colors">Reportagem Visual</span>
+                                <span className="hidden md:inline text-brandCyanDark">•</span>
+                                <span className="hover:text-white transition-colors">React SPA</span>
                             </div>
                         </div>
                     </footer>
